@@ -185,10 +185,10 @@ footer p{margin:0 0 6px;max-width:70ch}
       <div class="foldbody">
     <ol class="steps">
       <li><span class="n">A</span><p>Open this page in <strong>Safari or Chrome</strong>, not inside Facebook, Instagram or a text message. Tip: save it to your home screen so it's one tap away tomorrow.</p></li>
-      <li><span class="n">B</span><p>Tap <strong>Vote</strong> next to a business. The FourLeaf ballot opens in a new tab, already on that business.</p></li>
+      <li><span class="n">B</span><p>Tap <strong>Vote</strong> next to a business. The FourLeaf ballot opens, already on that business.</p></li>
       <li><span class="n">C</span><p>On the FourLeaf page, scroll down past the orange <span class="fl">2027 Voting Is Now Open!</span> banner to the business's name and tap <strong>VOTE</strong>. The button changes to <span class="flv">✓ VOTED</span>. If you see <strong>CHANGE VOTE</strong> instead, you already voted in that category today, so leave it alone.</p></li>
       <li><span class="n">D</span><p><strong>First time only:</strong> FourLeaf asks you to sign in or create a free account. After that it remembers you, as long as you keep using the same browser.</p></li>
-      <li><span class="n">E</span><p>Come back to this tab and tap the next one. We check off each business as you go, and the checkmarks clear at midnight so you can vote again tomorrow.</p></li>
+      <li><span class="n">E</span><p><strong>Go back to this page</strong> with your phone's Back: swipe in from the left edge on an iPhone, or tap Back on Android or a computer. Then tap the next one. We check off each business as you go, and the checkmarks clear at midnight so you can vote again tomorrow.</p></li>
     </ol>
     <div class="tip"><strong>Only want to vote for a few?</strong> Tap <strong>+ MY LIST</strong> under each business you want. It turns green and is saved to your list. Then tap <strong>MY LIST</strong> above the search bar to show just those businesses. The page stays on your list until you tap <strong>All</strong>. Your list stays saved on this phone or computer.</div>
         <h3 class="rules-h">Rules and tips</h3>
@@ -270,7 +270,7 @@ let today = nyDate();
 let picks = store.get("vl_list", {});
 Object.keys(picks).forEach(k => { if (!DATA.some(d=>d.e===k)) delete picks[k]; });
 let votedDay = store.get("vl_voted", {date: today, ids: {}});
-let history = store.get("vl_history", {});
+let voteDays = store.get("vl_history", {});
 if (votedDay.date !== today) votedDay = {date: today, ids: {}};
 let view = store.get("vl_view","all"), cat = "All", query = "";
 if (!["all","todo","picks"].includes(view)) view = "all";
@@ -295,7 +295,7 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 let toastT;
 function toast(msg){ const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(()=>t.classList.remove("show"), 2600); }
-function save(){ store.set("vl_list", picks); store.set("vl_voted", votedDay); store.set("vl_history", history); }
+function save(){ store.set("vl_list", picks); store.set("vl_voted", votedDay); store.set("vl_history", voteDays); }
 function rollover(){
   const now = nyDate();
   if (now !== today){ today = now; votedDay = {date: today, ids: {}}; save(); renderAll(); }
@@ -311,14 +311,14 @@ function renderHeader(){
   let count = 0;
   for (let i = 0; i < TOTAL_DAYS; i++){
     const d = new Date(Date.parse(START+"T12:00:00Z") + i*86400000).toISOString().slice(0,10);
-    if (history[d]) count++;
+    if (voteDays[d]) count++;
   }
   $("#daysVoted").textContent = count;
   $("#daysVotedLbl").textContent = count === 1 ? "day voted" : "days voted";
   let s = 0;
   for (let i = ti; i >= 0; i--){
     const d = new Date(Date.parse(START+"T12:00:00Z") + i*86400000).toISOString().slice(0,10);
-    if (history[d]) s++; else if (i === ti) continue; else break;
+    if (voteDays[d]) s++; else if (i === ti) continue; else break;
   }
   $("#streak").textContent = s;
 }
@@ -363,7 +363,7 @@ function rowHTML(d){
             <button class="star" data-star="${d.e}" aria-pressed="${!!picks[d.e]}" aria-label="${picks[d.e]?"Remove":"Add"} ${esc(d.n)}, ${esc(d.c)}, ${picks[d.e]?"from":"to"} MY LIST">${picks[d.e]?"✓ On MY LIST":"+ MY LIST"}</button>
           </div>
           <div class="act">
-            ${locked ? `<span class="used" aria-label="Category already voted today">Opens tomorrow</span>` : `<a class="vote" href="${VOTE_URL(d.e)}" target="_blank" rel="noopener" data-vote="${d.e}">${isDone ? "✓ Voted" : "Vote"}</a>`}
+            ${locked ? `<span class="used" aria-label="Category already voted today">Opens tomorrow</span>` : `<a class="vote" href="${VOTE_URL(d.e)}" data-vote="${d.e}">${isDone ? "✓ Voted" : "Vote"}</a>`}
             <button class="undo" data-undo="${d.e}">Not voted yet</button>
           </div>
         </div>`;
@@ -427,18 +427,17 @@ document.addEventListener("click", e => {
     if (w && w !== id){ e.preventDefault(); toast("You already voted in this category today. A second vote would move it."); return; }
     if (!votedDay.ids[id]){
       votedDay.ids[id] = 1;
-      history[today] = 1;
+      voteDays[today] = 1;
       save();
       // let the link open first, then update the row
       setTimeout(()=>{ renderHeader(); renderList(); renderProgress(); }, 150);
-      toast("Scroll down on the FourLeaf page and tap VOTE");
     }
     return;
   }
   const u = e.target.closest("[data-undo]");
   if (u){
     delete votedDay.ids[u.dataset.undo];
-    if (!Object.keys(votedDay.ids).length) delete history[today];
+    if (!Object.keys(votedDay.ids).length) delete voteDays[today];
     save(); renderHeader(); renderList(); renderProgress();
     return;
   }
@@ -464,6 +463,15 @@ document.addEventListener("click", e => {
 });
 $("#q").addEventListener("input", e => { query = e.target.value; renderList(); });
 document.addEventListener("visibilitychange", () => { if (!document.hidden) rollover(); });
+// coming back from FourLeaf with Back: reload saved state and redraw
+window.addEventListener("pageshow", e => {
+  if (e.persisted){
+    picks = store.get("vl_list", {});
+    votedDay = store.get("vl_voted", {date: today, ids: {}});
+    voteDays = store.get("vl_history", {});
+    rollover(); renderAll();
+  }
+});
 window.addEventListener("focus", rollover);
 setInterval(rollover, 60000);
 
