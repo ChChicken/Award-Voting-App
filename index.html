@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vote Lynbrook: Best of Long Island 2027</title>
+<meta name="description" content="Vote every day for Lynbrook Chamber of Commerce businesses in the FourLeaf Best of Long Island 2027 contest.">
+<meta name="theme-color" content="#1F4A3D">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Vote Lynbrook">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231F4A3D'/%3E%3Cpath d='M18 33l9 9 19-20' stroke='%23E7D9B3' stroke-width='7' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%231F4A3D'/%3E%3Cpath d='M18 33l9 9 19-20' stroke='%23E7D9B3' stroke-width='7' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#22301F; --ink-2:#4B5A47; --paper:#F7F3E9; --paper-2:#FFFDF8;
+  --green:#1F4A3D; --green-2:#2E5B4C; --gold:#B98A2E; --gold-soft:#E7D9B3;
+  --line:#DCD3BC; --done:#E7EEE9; --warn:#a04a3a; --warn-bg:#FBF0EC;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:'Public Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:15px;line-height:1.5;-webkit-text-size-adjust:100%}
+a{color:var(--green)}
+button{font-family:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+
+/* In-app browser banner */
+.inapp{display:none;background:var(--warn);color:#fff;padding:12px 0;font-size:14px}
+.inapp.show{display:block}
+.inapp strong{font-weight:700}
+
+/* Header */
+header{background:var(--green);color:var(--paper-2);padding:28px 0 22px}
+.kicker{font-size:13.5px;opacity:.85;margin:0 0 4px}
+h1{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(30px,6vw,44px);line-height:1.08;margin:0 0 10px;letter-spacing:-.01em}
+.lede{max-width:60ch;margin:0 0 18px;font-size:15.5px;opacity:.95}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;margin-bottom:18px}
+.facts span{display:inline-flex;align-items:center;gap:6px}
+.facts b{font-weight:700}
+
+/* Punch card */
+.punch{max-width:560px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:12px 14px}
+.punch-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px;font-size:13px}
+.punch-top .big{font-family:'Fraunces',serif;font-size:17px;font-weight:600}
+.cells{display:grid;grid-template-columns:repeat(auto-fill,15px);gap:4px}
+.cell{width:15px;height:15px;border-radius:3px;background:rgba(255,255,255,.12)}
+.cell.voted{background:var(--gold-soft)}
+.cell.today{box-shadow:0 0 0 2px var(--gold) inset}
+.cell.past:not(.voted){background:rgba(255,255,255,.05)}
+.punch-key{display:flex;gap:14px;font-size:11.5px;opacity:.8;margin-top:8px;flex-wrap:wrap}
+.punch-key i{display:inline-block;width:10px;height:10px;border-radius:2px;vertical-align:-1px;margin-right:5px}
+
+/* How to */
+.howto{background:#fff;border-bottom:3px solid var(--gold)}
+.howto .wrap{padding-top:20px;padding-bottom:20px}
+h2{font-family:'Fraunces',serif;font-weight:700;font-size:21px;margin:0 0 12px}
+.steps{display:grid;gap:9px;margin:0;padding:0;list-style:none}
+.steps li{display:flex;gap:11px;align-items:flex-start}
+.steps .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--green);color:var(--paper-2);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;margin-top:1px}
+.steps p{margin:0}
+.fl{display:inline-block;background:#F28C28;color:#fff;font-weight:700;font-size:12px;padding:1px 7px;border-radius:4px;white-space:nowrap}
+.flv{display:inline-block;border:1px solid #2E7D32;color:#2E7D32;font-weight:700;font-size:11.5px;padding:0 6px;border-radius:3px}
+.tip{margin-top:14px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 13px;font-size:14px}
+.rules-toggle{margin-top:12px;background:none;border:0;padding:0;color:var(--green);font-weight:600;font-size:14px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.rules{display:none;margin-top:10px;font-size:14px;color:var(--ink-2)}
+.rules.open{display:block}
+.rules ul{margin:6px 0 0;padding-left:20px}
+.rules li{margin:3px 0}
+
+/* Toolbar */
+.bar{position:sticky;top:0;z-index:5;background:var(--paper-2);border-bottom:1px solid var(--line);box-shadow:0 2px 6px rgba(34,48,31,.06)}
+.bar .wrap{padding-top:10px;padding-bottom:10px}
+.progress-row{display:flex;align-items:center;gap:12px;margin-bottom:9px}
+.ptext{font-size:14px;white-space:nowrap}
+.ptext b{font-family:'Fraunces',serif;font-size:18px}
+.track{flex:1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.fill{height:100%;background:var(--green-2);width:0;transition:width .35s ease}
+.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:99px;overflow:hidden;background:#fff}
+.seg button{border:0;background:none;padding:6px 12px;font-size:13px;font-weight:600;color:var(--ink-2);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--green);color:var(--paper-2)}
+.search{flex:1 1 180px;min-width:150px;position:relative}
+.search input{width:100%;border:1px solid var(--line);border-radius:99px;padding:7px 12px 7px 32px;font-size:14px;background:#fff;color:var(--ink);font-family:inherit}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);opacity:.5}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-top:9px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:99px;padding:4px 11px;font-size:12.5px;color:var(--ink-2);cursor:pointer;font-weight:500}
+.chip[aria-pressed="true"]{background:var(--gold-soft);border-color:var(--gold);color:var(--ink);font-weight:600}
+
+/* List */
+main .wrap{padding-top:8px;padding-bottom:40px}
+.group h3{font-family:'Fraunces',serif;font-weight:600;font-size:19px;margin:22px 0 8px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.group h3 small{font-family:'Public Sans',sans-serif;font-weight:500;font-size:12.5px;color:var(--ink-2)}
+.list{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.row{display:flex;align-items:center;gap:10px;padding:11px 12px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row.done{background:var(--done)}
+.row.locked{background:#F3F0E4}
+.row.locked .name,.row.locked .cat{opacity:.55}
+.used{display:inline-flex;align-items:center;justify-content:center;min-width:92px;padding:9px 12px;border-radius:9px;border:1px dashed var(--line);color:var(--ink-2);font-size:13px;font-weight:600;background:transparent}
+.row.locked .clash{background:#EDE8DA;color:var(--ink-2)}
+.star{flex:0 0 34px;height:34px;border:0;background:none;cursor:pointer;color:var(--line);display:flex;align-items:center;justify-content:center;border-radius:8px}
+.star[aria-pressed="true"]{color:var(--gold)}
+.star svg{width:21px;height:21px}
+.info{flex:1;min-width:0}
+.name{font-weight:700;font-size:15.5px;line-height:1.3}
+.cat{font-size:13.5px;color:var(--ink-2)}
+.member{font-size:12px;color:var(--ink-2);opacity:.85}
+.clash{margin-top:4px;font-size:12.5px;color:var(--warn);background:var(--warn-bg);border-radius:6px;padding:3px 8px;display:inline-block}
+.act{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.vote{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:92px;padding:9px 14px;border-radius:9px;background:var(--gold);color:#fff;font-weight:700;font-size:14px;text-decoration:none;border:0}
+.vote:hover{background:#a67a24}
+.row.done .vote{background:#fff;color:var(--green);border:1px solid var(--green-2)}
+.undo{border:0;background:none;padding:0;font-size:11.5px;color:var(--ink-2);text-decoration:underline;cursor:pointer;display:none}
+.row.done .undo{display:inline}
+.empty{text-align:center;padding:40px 16px;color:var(--ink-2)}
+.empty button{margin-top:10px}
+.btn2{border:1px solid var(--green-2);background:#fff;color:var(--green);border-radius:99px;padding:7px 14px;font-weight:600;font-size:13.5px;cursor:pointer}
+
+footer{border-top:1px solid var(--line);padding:22px 0 40px;font-size:12.5px;color:var(--ink-2)}
+footer p{margin:0 0 6px;max-width:70ch}
+
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:20;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:560px){
+  .wrap{padding:0 16px}
+  .cells{grid-template-columns:repeat(auto-fill,13px);gap:3px}
+  .cell{width:13px;height:13px}
+  .vote{min-width:80px;padding:9px 12px}
+  .row{padding:10px 8px 10px 4px;gap:6px}
+  .progress-row{gap:9px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="inapp" id="inapp" role="alert">
+  <div class="wrap">
+    <strong>Open this page in Safari or Chrome before you vote.</strong>
+    You are inside another app's built-in browser, and FourLeaf will keep signing you out. Tap the <strong>•••</strong> or share menu at the top or bottom of the screen, then choose <strong>Open in browser</strong> (or <strong>Open in Safari</strong>).
+  </div>
+</div>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">Lynbrook Chamber of Commerce</p>
+    <h1>Vote for Lynbrook, every day</h1>
+    <p class="lede">Your Lynbrook neighbors made the FourLeaf Best of Long Island 2027 ballot. You can vote once a day in every category, so a minute a day from each of us adds up fast.</p>
+    <div class="facts">
+      <span>🗳️ <b id="bizCount"></b> Lynbrook businesses in <b id="spotCount"></b> categories</span>
+      <span>📅 Voting ends <b>December 15</b> at 11:59 PM</span>
+      <span>⏳ <b id="daysLeft"></b></span>
+    </div>
+    <div class="punch" aria-label="Your voting days">
+      <div class="punch-top">
+        <span class="big" id="punchText"></span>
+        <span id="streakText"></span>
+      </div>
+      <div class="cells" id="cells"></div>
+      <div class="punch-key">
+        <span><i style="background:var(--gold-soft)"></i>A day you voted</span>
+        <span><i style="box-shadow:0 0 0 2px var(--gold) inset;background:rgba(255,255,255,.12)"></i>Today</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="howto" aria-labelledby="howto-h">
+  <div class="wrap">
+    <h2 id="howto-h">How to vote</h2>
+    <ol class="steps">
+      <li><span class="n">A</span><p>Open this page in <strong>Safari or Chrome</strong>, not inside Facebook, Instagram or a text message. Tip: save it to your home screen so it's one tap away tomorrow.</p></li>
+      <li><span class="n">B</span><p>Tap <strong>Vote</strong> next to a business. The FourLeaf ballot opens in a new tab, already on that business.</p></li>
+      <li><span class="n">C</span><p>On the FourLeaf page, scroll down past the orange <span class="fl">2027 Voting Is Now Open!</span> banner to the business's name and tap <strong>VOTE</strong>. The button changes to <span class="flv">✓ VOTED</span>.</p></li>
+      <li><span class="n">D</span><p><strong>First time only:</strong> FourLeaf asks you to sign in or create a free account. After that it remembers you, as long as you keep using the same browser.</p></li>
+      <li><span class="n">E</span><p>Come back to this tab and tap the next one. We check off each business as you go, and the checkmarks clear at midnight so you can vote again tomorrow.</p></li>
+    </ol>
+    <div class="tip">⭐ <strong>Short on time?</strong> Tap the star next to the places you love, then choose <strong>My picks</strong> to vote for just those each day.</div>
+    <button class="rules-toggle" id="rulesBtn" aria-expanded="false" aria-controls="rules">📋 Voting rules and tips</button>
+    <div class="rules" id="rules">
+      <ul>
+        <li>One vote per person, per category, per day, from October 1 through December 15.</li>
+        <li>Five categories have two Lynbrook nominees. You get one vote in a category each day, so choose one. Once you vote for one, the other locks until tomorrow. You can switch which one you support on a different day.</li>
+        <li>Use only your own FourLeaf account. FourLeaf checks for fraud and removes suspicious votes, so please don't make extra accounts.</li>
+        <li>If FourLeaf asks you to sign in again, you've probably opened it in a different browser or app. Switch back to Safari or Chrome.</li>
+        <li>Share this page with friends and family. Every person voting daily makes a difference.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="progress-row">
+      <span class="ptext" id="ptext"></span>
+      <div class="track" aria-hidden="true"><div class="fill" id="fill"></div></div>
+    </div>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Show">
+        <button data-view="all" aria-pressed="true">All</button>
+        <button data-view="todo" aria-pressed="false">Still to vote</button>
+        <button data-view="picks" aria-pressed="false">⭐ My picks</button>
+      </div>
+      <label class="search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7.5"/><path d="m20.5 20.5-4-4"/></svg>
+        <input id="q" type="search" placeholder="Search businesses" aria-label="Search businesses" autocomplete="off">
+      </label>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Category"></div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap" id="list"></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Shared by the Lynbrook Chamber of Commerce to support our local businesses. Not affiliated with FourLeaf Federal Credit Union or the Best of Long Island contest. All voting happens on the official FourLeaf ballot at bestoflongisland.com.</p>
+    <p>Your stars and checkmarks are saved only on this device.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const DATA = [{"g": "Arts & Entertainment", "c": "Movie Theater", "n": "Regal Cinemas", "m": "Regal Cinemas", "e": "560911955", "k": "6186883"}, {"g": "Arts & Entertainment", "c": "Podcast", "n": "Chasing Fabulous", "m": "Chasing Fabulous", "e": "560912037", "k": "6186889"}, {"g": "Automotive", "c": "Auto Broker", "n": "Auto Concierge NY", "m": "AutoConcierge NY", "e": "560912176", "k": "6186900"}, {"g": "Automotive", "c": "Auto Parts Store", "n": "Advance Auto Parts", "m": "Advance Auto Parts", "e": "560912236", "k": "6186904"}, {"g": "Bars & Nightlife", "c": "Cigar Shop", "n": "Timeless Cigar Lounge", "m": "Timeless Cigar Lounge", "e": "560912627", "k": "6186930"}, {"g": "Education", "c": "Cooking School", "n": "Polly Talbott's A la Carte", "m": "Polly Talbott's A la Carte", "e": "560913030", "k": "6186958"}, {"g": "Education", "c": "Learning Center", "n": "Huntington Learning Center - Lynbrook", "m": "Huntington Learning Center", "e": "560913120", "k": "6186965"}, {"g": "Education", "c": "Mommy and Me Classes", "n": "The Little Gym of Lynbrook", "m": "The Little Gym of Lynbrook", "e": "560913154", "k": "6186967"}, {"g": "Education", "c": "Music School", "n": "School of Rock", "m": "School of Rock Rockville Centre", "e": "560913174", "k": "6186968"}, {"g": "Fashion & Clothing", "c": "Men’s Suit Store", "n": "Mur-Lees Mens & Boys Wear", "m": "Mur-Lees Mens & Boys Wear", "e": "560913391", "k": "6186983"}, {"g": "Fashion & Clothing", "c": "Women’s Fashion Store", "n": "Haila Atelier & Collection", "m": "Zaraz Collection (Haila Atelier & Collection)", "e": "560913444", "k": "6186987"}, {"g": "Food", "c": "Appetizer", "n": "Elsie Lane", "m": "Elsie Lane", "e": "560913472", "k": "6186989"}, {"g": "Food", "c": "BBQ Sauce", "n": "Elsie Lane", "m": "Elsie Lane", "e": "560913596", "k": "6186995"}, {"g": "Food", "c": "BBQ Sauce", "n": "The Filthy Pig Barbecue", "m": "The Filthy Pig BBQ / Beckmann's Delicatessen", "e": "560913603", "k": "6186995"}, {"g": "Food", "c": "Branzino", "n": "Livorno", "m": "Livorno Ristorante", "e": "560913644", "k": "6186998"}, {"g": "Food", "c": "Burger", "n": "Elsie Lane", "m": "Elsie Lane", "e": "560913717", "k": "6187002"}, {"g": "Food", "c": "Chicken Pot Pie", "n": "Pearsall’s Station", "m": "Pearsall's Station", "e": "560913838", "k": "6187010"}, {"g": "Food", "c": "Healthy Eatery", "n": "Hummus Fit", "m": "Hummus Fit", "e": "560914324", "k": "6187041"}, {"g": "Food", "c": "Linguini and Clam Sauce", "n": "Livorno", "m": "Livorno Ristorante", "e": "560914436", "k": "6187048"}, {"g": "Food", "c": "Mac and Cheese", "n": "Elsie Lane", "m": "Elsie Lane", "e": "560914516", "k": "6187054"}, {"g": "Food", "c": "Mac and Cheese", "n": "Gourmology", "m": "Gourmology", "e": "560914518", "k": "6187054"}, {"g": "Food", "c": "Onion Rings", "n": "Elsie Lane", "m": "Elsie Lane", "e": "560914651", "k": "6187064"}, {"g": "Food", "c": "Ribs", "n": "Gourmology", "m": "Gourmology", "e": "560914803", "k": "6187077"}, {"g": "Food", "c": "Veggie Burger", "n": "Elsie Lane", "m": "Elsie Lane", "e": "560915057", "k": "6187094"}, {"g": "Food", "c": "Wings", "n": "Gourmology", "m": "Gourmology", "e": "560915088", "k": "6187096"}, {"g": "Health, Wellness & Beauty", "c": "Assisted Living", "n": "The Bristal Assisted Living", "m": "The Bristal Assisted Living at Lynbrook", "e": "560915212", "k": "6187104"}, {"g": "Health, Wellness & Beauty", "c": "Audiologist", "n": "Dr. Esther Fogel - Comprehensive Audiology", "m": "Comprehensive Audiology", "e": "560915227", "k": "6187106"}, {"g": "Health, Wellness & Beauty", "c": "Nursing Home", "n": "Lynbrook Restorative Therapy and Nursing", "m": "Lynbrook Restorative Therapy & Nursing", "e": "560916159", "k": "6187169"}, {"g": "Health, Wellness & Beauty", "c": "OB-GYN", "n": "The Woman's Health Pavilion", "m": "The Woman's Health Pavilion", "e": "560916195", "k": "6187171"}, {"g": "Health, Wellness & Beauty", "c": "Personal Trainer", "n": "Iron Monkey Strength", "m": "Iron Monkey Strength", "e": "560916407", "k": "6187185"}, {"g": "Home & Garden", "c": "Exterminator", "n": "Allways Exterminating Company", "m": "Allways Exterminating Company", "e": "560917284", "k": "6187243"}, {"g": "Home & Garden", "c": "Home Remodeling", "n": "Lanzello Remodeling", "m": "Lanzello Remodeling", "e": "560917477", "k": "6187256"}, {"g": "Home & Garden", "c": "Kitchen and Bath", "n": "C&L Plumbing Supply and Kitchen & Bath Showroom", "m": "C & L Plumbing Supply Inc.", "e": "560917576", "k": "6187264"}, {"g": "Home & Garden", "c": "Kitchen and Bath", "n": "ShowerCrafters", "m": "ShowerCrafters", "e": "560917591", "k": "6187264"}, {"g": "Home & Garden", "c": "Plumbing Supply", "n": "C&L Plumbing Supply and Kitchen & Bath Showroom", "m": "C & L Plumbing Supply Inc.", "e": "560917805", "k": "6187282"}, {"g": "Home & Garden", "c": "Real Estate Agent", "n": "Jennie Katz - Blue Island Homes", "m": "Blue Island Homes", "e": "560917889", "k": "6187288"}, {"g": "Home & Garden", "c": "Real Estate Boutique Agency (Under 50 Brokers)", "n": "Blue Island Homes", "m": "Blue Island Homes", "e": "560917915", "k": "6187290"}, {"g": "Pets", "c": "Dog Trainer", "n": "UpDog Pet Services", "m": "UpDog Pet Services", "e": "560918315", "k": "6187317"}, {"g": "Restaurants", "c": "Japanese Restaurant", "n": "Inatome's HibachiBachi Lynbrook", "m": "Inatome's HibachiBachi Lynbrook", "e": "560918795", "k": "6187352"}, {"g": "Restaurants", "c": "Restaurant", "n": "Gourmology", "m": "Gourmology", "e": "560918908", "k": "6187359"}, {"g": "Restaurants", "c": "Steakhouse", "n": "Prime39", "m": "Prime 39 Restaurant", "e": "560919005", "k": "6187364"}, {"g": "Services", "c": "Accountant/CPA", "n": "Ryan Hode", "m": "Ryan Hode (Accountant)", "e": "560919102", "k": "6187370"}, {"g": "Services", "c": "Boss", "n": "Barry Kornblum - C&L Plumbing Supply and Kitchen & Bath Showroom", "m": "C & L Plumbing Supply Inc.", "e": "560919143", "k": "6187374"}, {"g": "Services", "c": "Computer Services", "n": "Lloyd Chrein, Tech Consultant", "m": "Lloyd Chrein, Tech Consultant", "e": "560919249", "k": "6187381"}, {"g": "Services", "c": "Content Creator - Entertainment", "n": "Eric Donaldson", "m": "Eric Donaldson", "e": "560919289", "k": "6187385"}, {"g": "Services", "c": "Employment Attorney", "n": "Christopher Marlborough Esq.", "m": "Christopher Marlborough Esq. (Employment Attorney)", "e": "560919527", "k": "6187404"}, {"g": "Services", "c": "Employment Attorney", "n": "The Marlborough Law Firm", "m": "Christopher Marlborough Esq. (Employment Attorney)", "e": "560919535", "k": "6187404"}, {"g": "Services", "c": "Financial Advisor", "n": "Pradeep Menon - Edward Jones", "m": "Edward Jones", "e": "560919584", "k": "6187407"}, {"g": "Services", "c": "Financial Advisor", "n": "Westco Financial Group", "m": "Westco Financial Group", "e": "560919590", "k": "6187407"}, {"g": "Services", "c": "Law Firm", "n": "Stockman & Poropat, PLLC", "m": "Stockman & Poropat, PLLC (Law Firm)", "e": "560919797", "k": "6187420"}, {"g": "Services", "c": "Printing Services", "n": "LMN Printing of NY, Inc", "m": "LMN Printing Co", "e": "560920058", "k": "6187437"}, {"g": "Services", "c": "Public Relations Firm", "n": "Corbett PR", "m": "Corbett Public Relations", "e": "560920125", "k": "6187441"}, {"g": "Services", "c": "Retirement Community", "n": "The Bristal Assisted Living - Multiple Locations", "m": "The Bristal Assisted Living at Lynbrook", "e": "560920182", "k": "6187444"}, {"g": "Services", "c": "Seamstress", "n": "Zaraz Collection", "m": "Zaraz Collection (Haila Atelier & Collection)", "e": "560920195", "k": "6187445"}, {"g": "Services", "c": "Tailor", "n": "Haila Atelier & Collection", "m": "Zaraz Collection (Haila Atelier & Collection)", "e": "560920269", "k": "6187451"}, {"g": "Shopping", "c": "Chamber of Commerce", "n": "Lynbrook Chamber of Commerce", "m": "Lynbrook Chamber of Commerce", "e": "560920498", "k": "6187467"}, {"g": "Shopping", "c": "Collectible & Nostalgia Store", "n": "LI Comic Shop LLC", "m": "LI Comic Shop", "e": "560920518", "k": "6187468"}, {"g": "Shopping", "c": "Customer Service", "n": "C&L Plumbing Supply and Kitchen & Bath Showroom", "m": "C & L Plumbing Supply Inc.", "e": "560920528", "k": "6187469"}, {"g": "Shopping", "c": "Hobby Store", "n": "Trainland", "m": "Trainland", "e": "560920639", "k": "6187476"}, {"g": "Shopping", "c": "Jewelry Store", "n": "Unicorn Jewels", "m": "Unicorn Jewels", "e": "560920686", "k": "6187479"}, {"g": "Sports & Activities", "c": "Bicycle Shop", "n": "Bike East Rockaway Lynbrook", "m": "Bike East Rockaway Lynbrook", "e": "560920838", "k": "6187492"}, {"g": "Sports & Activities", "c": "Children’s Gym", "n": "The Little Gym of Lynbrook", "m": "The Little Gym of Lynbrook", "e": "560920964", "k": "6187501"}, {"g": "Sports & Activities", "c": "Children’s Gymnastics Gym", "n": "The Little Gym of Lynbrook", "m": "The Little Gym of Lynbrook", "e": "560920983", "k": "6187502"}, {"g": "Sports & Activities", "c": "Climbing Walls", "n": "Iron Monkey Strength", "m": "Iron Monkey Strength", "e": "560921005", "k": "6187504"}, {"g": "Sports & Activities", "c": "Soccer Club", "n": "Lynbrook East Rockaway Soccer Club", "m": "Lynbrook East Rockaway Soccer Club", "e": "560921375", "k": "6187534"}];
+const VOTE_URL = id => "https://www.bestoflongisland.com/voting/#/gallery/" + id;
+const START = "2026-10-01", END = "2026-12-15";
+const ORDER = ["Arts & Entertainment","Automotive","Bars & Nightlife","Education","Fashion & Clothing","Food","Health, Wellness & Beauty","Home & Garden","Pets","Restaurants","Services","Shopping","Sports & Activities","Weddings"];
+
+// ---------- storage (safe if blocked) ----------
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+
+// ---------- dates in New York time ----------
+function nyDate(d = new Date()){
+  const p = new Intl.DateTimeFormat("en-CA",{timeZone:"America/New_York",year:"numeric",month:"2-digit",day:"2-digit"}).format(d);
+  return p; // YYYY-MM-DD
+}
+function dayIndex(iso){ return Math.round((Date.parse(iso+"T12:00:00Z") - Date.parse(START+"T12:00:00Z"))/86400000); }
+const TOTAL_DAYS = dayIndex(END) + 1;
+
+// ---------- state ----------
+let today = nyDate();
+let picks = store.get("vl_picks", {});
+let votedDay = store.get("vl_voted", {date: today, ids: {}});
+let history = store.get("vl_history", {});
+if (votedDay.date !== today) votedDay = {date: today, ids: {}};
+let view = "all", cat = "All", query = "";
+
+// competing Lynbrook nominees in the same FourLeaf category
+const byCat = {};
+DATA.forEach(d => (byCat[d.k] = byCat[d.k] || []).push(d));
+
+// which Lynbrook entry (if any) got today's vote in a FourLeaf category
+const votedIn = k => (byCat[k].find(o => votedDay.ids[o.e]) || {}).e;
+
+// ---------- in-app browser detection ----------
+(function(){
+  const ua = navigator.userAgent || "";
+  if (/FBAN|FBAV|FB_IAB|Instagram|LinkedInApp|Line\/|Twitter|TikTok|Snapchat|Pinterest|GSA\//i.test(ua)) {
+    document.getElementById("inapp").classList.add("show");
+  }
+})();
+
+// ---------- helpers ----------
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let toastT;
+function toast(msg){ const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(()=>t.classList.remove("show"), 2600); }
+function save(){ store.set("vl_picks", picks); store.set("vl_voted", votedDay); store.set("vl_history", history); }
+function rollover(){
+  const now = nyDate();
+  if (now !== today){ today = now; votedDay = {date: today, ids: {}}; save(); renderAll(); }
+}
+
+// ---------- header ----------
+function renderHeader(){
+  $("#spotCount").textContent = new Set(DATA.map(d=>d.k)).size;
+  $("#bizCount").textContent = new Set(DATA.map(d=>d.m)).size;
+  const ti = dayIndex(today);
+  const left = TOTAL_DAYS - ti;
+  $("#daysLeft").textContent = ti < 0 ? "Voting opens October 1" : left <= 0 ? "Voting has closed" : left === 1 ? "Last day to vote" : left + " days left";
+  const cells = $("#cells"); cells.innerHTML = "";
+  let count = 0;
+  for (let i = 0; i < TOTAL_DAYS; i++){
+    const d = new Date(Date.parse(START+"T12:00:00Z") + i*86400000).toISOString().slice(0,10);
+    const c = document.createElement("div");
+    c.className = "cell" + (history[d] ? " voted" : "") + (i === ti ? " today" : "") + (i < ti ? " past" : "");
+    c.title = new Date(d+"T12:00:00Z").toLocaleDateString("en-US",{month:"short",day:"numeric",timeZone:"UTC"}) + (history[d] ? ": voted" : "");
+    cells.appendChild(c);
+    if (history[d]) count++;
+  }
+  $("#punchText").textContent = count === 0 ? "Your voting days start today" : `You've voted on ${count} of ${TOTAL_DAYS} days`;
+  // streak
+  let s = 0;
+  for (let i = ti; i >= 0; i--){
+    const d = new Date(Date.parse(START+"T12:00:00Z") + i*86400000).toISOString().slice(0,10);
+    if (history[d]) s++; else if (i === ti) continue; else break;
+  }
+  $("#streakText").textContent = s >= 2 ? `🔥 ${s}-day streak` : "";
+}
+
+// ---------- chips ----------
+function renderChips(){
+  const cats = ["All", ...ORDER.filter(g => DATA.some(d=>d.g===g))];
+  $("#chips").innerHTML = cats.map(c => `<button class="chip" data-cat="${esc(c)}" aria-pressed="${c===cat}">${esc(c)}</button>`).join("");
+}
+
+// ---------- list ----------
+function visible(){
+  const q = query.trim().toLowerCase();
+  return DATA.filter(d => {
+    if (q) return (d.n+" "+d.m+" "+d.c+" "+d.g).toLowerCase().includes(q);
+    if (cat !== "All" && d.g !== cat) return false;
+    if (view === "todo" && votedIn(d.k)) return false;
+    if (view === "picks" && !picks[d.m]) return false;
+    return true;
+  });
+}
+const STAR = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.1l-5.7 3.2 1.2-6.4-4.7-4.4 6.4-.8z"/></svg>';
+
+function renderList(){
+  const items = visible();
+  const host = $("#list");
+  if (!items.length){
+    let msg = "No businesses match that search.";
+    let btn = "";
+    if (!query){
+      if (view === "picks") { msg = "You haven't starred any businesses yet. Tap the star next to a business to add it to My picks."; btn = `<button class="btn2" data-go="all">Show all businesses</button>`; }
+      else if (view === "todo") { msg = "🎉 You've voted in every category on this list today. Come back tomorrow to vote again."; btn = `<button class="btn2" data-go="all">Show all businesses</button>`; }
+    }
+    host.innerHTML = `<div class="empty"><p>${msg}</p>${btn}</div>`;
+    return;
+  }
+  const groups = {};
+  items.forEach(d => (groups[d.g] = groups[d.g] || []).push(d));
+  host.innerHTML = ORDER.filter(g => groups[g]).map(g => {
+    const rows = groups[g].sort((a,b)=> a.n.localeCompare(b.n) || a.c.localeCompare(b.c));
+    const ks = [...new Set(rows.map(d=>d.k))];
+    const done = ks.filter(k=>votedIn(k)).length;
+    return `<section class="group"><h3>${esc(g)} <small>${done} of ${ks.length} ${ks.length===1?"category":"categories"} voted today</small></h3><div class="list">` +
+      rows.map(d => {
+        const isDone = !!votedDay.ids[d.e];
+        const winner = votedIn(d.k);
+        const locked = !!winner && winner !== d.e;
+        const others = byCat[d.k].filter(o => o.e !== d.e);
+        let clash = "";
+        if (others.length){
+          if (locked) clash = `<div class="clash">You picked ${esc(byCat[d.k].find(o=>o.e===winner).n)} here today. Opens again tomorrow.</div>`;
+          else if (isDone) clash = `<div class="clash">Your pick in this category today. ${esc(others.map(o=>o.n).join(", "))} is locked until tomorrow.</div>`;
+          else clash = `<div class="clash">Choose one per day: ${esc(others.map(o=>o.n).join(", "))} is also in this category.</div>`;
+        }
+        const showMember = d.m.toLowerCase().replace(/[^a-z0-9]/g,"") !== d.n.toLowerCase().replace(/[^a-z0-9]/g,"") && !d.n.toLowerCase().includes(d.m.toLowerCase().split(" (")[0]);
+        return `<div class="row${isDone?" done":""}${locked?" locked":""}">
+          <button class="star" data-star="${esc(d.m)}" aria-pressed="${!!picks[d.m]}" aria-label="${picks[d.m]?"Remove":"Add"} ${esc(d.m)} ${picks[d.m]?"from":"to"} My picks">${STAR}</button>
+          <div class="info">
+            <div class="name">${esc(d.n)}</div>
+            <div class="cat">${esc(d.c)}</div>
+            ${showMember ? `<div class="member">Chamber member: ${esc(d.m)}</div>` : ""}
+            ${clash}
+          </div>
+          <div class="act">
+            ${locked ? `<span class="used" aria-label="Category already voted today">Opens tomorrow</span>` : `<a class="vote" href="${VOTE_URL(d.e)}" target="_blank" rel="noopener" data-vote="${d.e}">${isDone ? "✓ Voted" : "Vote"}</a>`}
+            <button class="undo" data-undo="${d.e}">Not voted yet</button>
+          </div>
+        </div>`;
+      }).join("") + `</div></section>`;
+  }).join("");
+}
+
+function renderProgress(){
+  const pool = view === "picks" ? DATA.filter(d=>picks[d.m]) : DATA;
+  const ks = [...new Set(pool.map(d=>d.k))];
+  const done = ks.filter(k=>votedIn(k)).length;
+  const total = ks.length;
+  $("#ptext").innerHTML = total ? `<b>${done}</b> of ${total} categories voted today` : "Star a business to build My picks";
+  $("#fill").style.width = total ? (done/total*100)+"%" : "0";
+}
+
+function renderAll(){ renderHeader(); renderChips(); renderList(); renderProgress(); }
+
+// ---------- events ----------
+document.addEventListener("click", e => {
+  const v = e.target.closest("[data-vote]");
+  if (v){
+    const id = v.dataset.vote;
+    const d = DATA.find(x=>x.e===id);
+    const w = votedIn(d.k);
+    if (w && w !== id){ e.preventDefault(); toast("You already voted in this category today"); return; }
+    if (!votedDay.ids[id]){
+      votedDay.ids[id] = 1;
+      history[today] = 1;
+      save();
+      // let the link open first, then update the row
+      setTimeout(()=>{ renderHeader(); renderList(); renderProgress(); }, 150);
+      toast("Scroll down on the FourLeaf page and tap VOTE");
+    }
+    return;
+  }
+  const u = e.target.closest("[data-undo]");
+  if (u){
+    delete votedDay.ids[u.dataset.undo];
+    if (!Object.keys(votedDay.ids).length) delete history[today];
+    save(); renderHeader(); renderList(); renderProgress();
+    return;
+  }
+  const s = e.target.closest("[data-star]");
+  if (s){
+    const m = s.dataset.star;
+    if (picks[m]) { delete picks[m]; toast("Removed from My picks"); }
+    else { picks[m] = 1; toast("Added to My picks"); }
+    save(); renderList(); renderProgress();
+    return;
+  }
+  const vb = e.target.closest("[data-view]");
+  if (vb){
+    view = vb.dataset.view;
+    document.querySelectorAll("[data-view]").forEach(b => b.setAttribute("aria-pressed", b === vb));
+    renderList(); renderProgress();
+    return;
+  }
+  const go = e.target.closest("[data-go]");
+  if (go){ document.querySelector('[data-view="all"]').click(); return; }
+  const c = e.target.closest("[data-cat]");
+  if (c){ cat = c.dataset.cat; renderChips(); renderList(); return; }
+});
+$("#q").addEventListener("input", e => { query = e.target.value; renderList(); });
+$("#rulesBtn").addEventListener("click", () => {
+  const r = $("#rules"); const open = r.classList.toggle("open");
+  $("#rulesBtn").setAttribute("aria-expanded", open);
+});
+document.addEventListener("visibilitychange", () => { if (!document.hidden) rollover(); });
+window.addEventListener("focus", rollover);
+setInterval(rollover, 60000);
+
+renderAll();
+</script>
+</body>
+</html>
