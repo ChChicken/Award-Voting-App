@@ -33,29 +33,18 @@ button{font-family:inherit}
 .inapp strong{font-weight:700}
 
 /* Header */
-header{background:var(--green);color:var(--paper-2);padding:28px 0 22px}
+header{background:var(--green);color:var(--paper-2);padding:22px 0 18px}
 .kicker{font-size:13.5px;opacity:.85;margin:0 0 4px}
 h1{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(30px,6vw,44px);line-height:1.08;margin:0 0 10px;letter-spacing:-.01em}
-.lede{max-width:60ch;margin:0 0 18px;font-size:15.5px;opacity:.95}
-.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;margin-bottom:18px}
-.facts span{display:inline-flex;align-items:center;gap:6px}
-.facts b{font-weight:700}
-
-/* Punch card */
-.punch{max-width:560px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:12px 14px}
-.punch-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px;font-size:13px}
-.punch-top .big{font-family:'Fraunces',serif;font-size:17px;font-weight:600}
-.cells{display:grid;grid-template-columns:repeat(auto-fill,15px);gap:4px}
-.cell{width:15px;height:15px;border-radius:3px;background:rgba(255,255,255,.12)}
-.cell.voted{background:var(--gold-soft)}
-.cell.today{box-shadow:0 0 0 2px var(--gold) inset}
-.cell.past:not(.voted){background:rgba(255,255,255,.05)}
-.punch-key{display:flex;gap:14px;font-size:11.5px;opacity:.8;margin-top:8px;flex-wrap:wrap}
-.punch-key i{display:inline-block;width:10px;height:10px;border-radius:2px;vertical-align:-1px;margin-right:5px}
+.lede{max-width:60ch;margin:0 0 14px;font-size:15px;opacity:.95}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:520px}
+.stat{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:8px 10px;text-align:center}
+.stat b{display:block;font-family:'Fraunces',serif;font-size:26px;line-height:1.1;color:var(--gold-soft)}
+.stat span{font-size:12px;opacity:.85}
 
 /* How to */
 .howto{background:#fff;border-bottom:3px solid var(--gold)}
-.howto .wrap{padding-top:20px;padding-bottom:20px}
+.howto .wrap{padding-top:10px;padding-bottom:10px;display:grid;gap:8px}
 h2{font-family:'Fraunces',serif;font-weight:700;font-size:21px;margin:0 0 12px}
 .steps{display:grid;gap:9px;margin:0;padding:0;list-style:none}
 .steps li{display:flex;gap:11px;align-items:flex-start}
@@ -64,11 +53,17 @@ h2{font-family:'Fraunces',serif;font-weight:700;font-size:21px;margin:0 0 12px}
 .fl{display:inline-block;background:#F28C28;color:#fff;font-weight:700;font-size:12px;padding:1px 7px;border-radius:4px;white-space:nowrap}
 .flv{display:inline-block;border:1px solid #2E7D32;color:#2E7D32;font-weight:700;font-size:11.5px;padding:0 6px;border-radius:3px}
 .tip{margin-top:14px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 13px;font-size:14px}
-.rules-toggle{margin-top:12px;background:none;border:0;padding:0;color:var(--green);font-weight:600;font-size:14px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
-.rules{display:none;margin-top:10px;font-size:14px;color:var(--ink-2)}
-.rules.open{display:block}
-.rules ul{margin:6px 0 0;padding-left:20px}
-.rules li{margin:3px 0}
+.fold{border:1px solid var(--line);border-radius:10px;background:#fff}
+.fold summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:11px 14px;font-weight:700;font-size:15px;color:var(--green)}
+.fold summary::-webkit-details-marker{display:none}
+.chev{width:9px;height:9px;border-right:2px solid var(--green);border-bottom:2px solid var(--green);transform:rotate(45deg);margin-top:-4px;transition:transform .2s}
+.fold[open] .chev{transform:rotate(-135deg);margin-top:4px}
+.foldbody{padding:0 14px 14px}
+.foldbody .tip{margin-top:12px}
+.rules-h{font-family:'Fraunces',serif;font-size:17px;margin:16px 0 4px;color:var(--ink)}
+.rules ul{margin:4px 0 0;padding-left:20px}
+.rules li{margin:4px 0}
+.rules{font-size:14px;color:var(--ink-2)}
 
 /* Toolbar */
 .bar{position:sticky;top:0;z-index:5;background:var(--paper-2);border-bottom:1px solid var(--line);box-shadow:0 2px 6px rgba(34,48,31,.06)}
@@ -95,16 +90,15 @@ main .wrap{padding-top:8px;padding-bottom:40px}
 .group h3{font-family:'Fraunces',serif;font-weight:600;font-size:19px;margin:22px 0 8px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .group h3 small{font-family:'Public Sans',sans-serif;font-weight:500;font-size:12.5px;color:var(--ink-2)}
 .list{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.row{display:flex;align-items:center;gap:10px;padding:11px 12px;border-top:1px solid var(--line)}
+.row{display:flex;align-items:center;gap:10px;padding:11px 14px;border-top:1px solid var(--line)}
 .row:first-child{border-top:0}
 .row.done{background:var(--done)}
 .row.locked{background:#F3F0E4}
 .row.locked .name,.row.locked .cat{opacity:.55}
 .used{display:inline-flex;align-items:center;justify-content:center;min-width:92px;padding:9px 12px;border-radius:9px;border:1px dashed var(--line);color:var(--ink-2);font-size:13px;font-weight:600;background:transparent}
 .row.locked .clash{background:#EDE8DA;color:var(--ink-2)}
-.star{flex:0 0 34px;height:34px;border:0;background:none;cursor:pointer;color:var(--line);display:flex;align-items:center;justify-content:center;border-radius:8px}
-.star[aria-pressed="true"]{color:var(--gold)}
-.star svg{width:21px;height:21px}
+.star{display:inline-block;margin-top:6px;border:1px solid var(--line);background:#fff;color:var(--ink-2);border-radius:99px;padding:3px 10px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
+.star[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
 .info{flex:1;min-width:0}
 .name{font-weight:700;font-size:15.5px;line-height:1.3}
 .cat{font-size:13.5px;color:var(--ink-2)}
@@ -116,6 +110,8 @@ main .wrap{padding-top:8px;padding-bottom:40px}
 .row.done .vote{background:#fff;color:var(--green);border:1px solid var(--green-2)}
 .undo{border:0;background:none;padding:0;font-size:11.5px;color:var(--ink-2);text-decoration:underline;cursor:pointer;display:none}
 .row.done .undo{display:inline}
+.dintro{margin:-2px 0 10px;font-size:13.5px;color:var(--ink-2);max-width:62ch}
+.group.double h3{color:var(--warn)}
 .empty{text-align:center;padding:40px 16px;color:var(--ink-2)}
 .empty button{margin-top:10px}
 .btn2{border:1px solid var(--green-2);background:#fff;color:var(--green);border-radius:99px;padding:7px 14px;font-weight:600;font-size:13.5px;cursor:pointer}
@@ -127,12 +123,35 @@ footer p{margin:0 0 6px;max-width:70ch}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
 @media (max-width:560px){
+  header{padding:16px 0 14px}
+  h1{font-size:28px;margin-bottom:6px}
+  .kicker{font-size:12.5px}
+  .lede{font-size:14px;margin-bottom:12px}
+  .stat b{font-size:22px}
+  .stat{padding:6px 6px}
   .wrap{padding:0 16px}
-  .cells{grid-template-columns:repeat(auto-fill,13px);gap:3px}
-  .cell{width:13px;height:13px}
   .vote{min-width:80px;padding:9px 12px}
-  .row{padding:10px 8px 10px 4px;gap:6px}
+  .row{padding:10px 12px;gap:8px}
   .progress-row{gap:9px}
+}
+@media (max-width:360px){
+  h1{font-size:24px}
+  .lede{font-size:13.5px}
+  .stat b{font-size:20px}
+  .stat span{font-size:11.5px}
+  .seg button{padding:6px 10px;font-size:12.5px}
+}
+@media (max-height:600px) and (orientation:portrait){
+  .lede{display:none}
+}
+@media (max-height:500px) and (orientation:landscape){
+  header{padding:12px 0}
+  h1{font-size:24px;margin-bottom:4px}
+  .lede{display:none}
+  .stats{max-width:420px}
+  .stat{padding:4px 6px}
+  .stat b{font-size:18px}
+  .bar{position:static}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -150,47 +169,41 @@ footer p{margin:0 0 6px;max-width:70ch}
   <div class="wrap">
     <p class="kicker">Lynbrook Chamber of Commerce</p>
     <h1>Vote for Lynbrook, every day</h1>
-    <p class="lede">Your Lynbrook neighbors made the FourLeaf Best of Long Island 2027 ballot. You can vote once a day in every category, so a minute a day from each of us adds up fast.</p>
-    <div class="facts">
-      <span>🗳️ <b id="bizCount"></b> Lynbrook businesses in <b id="spotCount"></b> categories</span>
-      <span>📅 Voting ends <b>December 15</b> at 11:59 PM</span>
-      <span>⏳ <b id="daysLeft"></b></span>
-    </div>
-    <div class="punch" aria-label="Your voting days">
-      <div class="punch-top">
-        <span class="big" id="punchText"></span>
-        <span id="streakText"></span>
-      </div>
-      <div class="cells" id="cells"></div>
-      <div class="punch-key">
-        <span><i style="background:var(--gold-soft)"></i>A day you voted</span>
-        <span><i style="box-shadow:0 0 0 2px var(--gold) inset;background:rgba(255,255,255,.12)"></i>Today</span>
-      </div>
+    <p class="lede"><b id="bizCount"></b> Lynbrook businesses made the FourLeaf Best of Long Island 2027 ballot. Vote once a day in each category through December 15.</p>
+    <div class="stats">
+      <div class="stat"><b id="daysLeft"></b><span id="daysLeftLbl">days left</span></div>
+      <div class="stat"><b id="daysVoted"></b><span id="daysVotedLbl">days voted</span></div>
+      <div class="stat"><b id="streak"></b><span>day streak</span></div>
     </div>
   </div>
 </header>
 
-<section class="howto" aria-labelledby="howto-h">
+<section class="howto">
   <div class="wrap">
-    <h2 id="howto-h">How to vote</h2>
+    <details class="fold" id="howFold">
+      <summary><span>How to vote and rules</span><span class="chev" aria-hidden="true"></span></summary>
+      <div class="foldbody">
     <ol class="steps">
       <li><span class="n">A</span><p>Open this page in <strong>Safari or Chrome</strong>, not inside Facebook, Instagram or a text message. Tip: save it to your home screen so it's one tap away tomorrow.</p></li>
       <li><span class="n">B</span><p>Tap <strong>Vote</strong> next to a business. The FourLeaf ballot opens in a new tab, already on that business.</p></li>
-      <li><span class="n">C</span><p>On the FourLeaf page, scroll down past the orange <span class="fl">2027 Voting Is Now Open!</span> banner to the business's name and tap <strong>VOTE</strong>. The button changes to <span class="flv">✓ VOTED</span>.</p></li>
+      <li><span class="n">C</span><p>On the FourLeaf page, scroll down past the orange <span class="fl">2027 Voting Is Now Open!</span> banner to the business's name and tap <strong>VOTE</strong>. The button changes to <span class="flv">✓ VOTED</span>. If you see <strong>CHANGE VOTE</strong> instead, you already voted in that category today, so leave it alone.</p></li>
       <li><span class="n">D</span><p><strong>First time only:</strong> FourLeaf asks you to sign in or create a free account. After that it remembers you, as long as you keep using the same browser.</p></li>
       <li><span class="n">E</span><p>Come back to this tab and tap the next one. We check off each business as you go, and the checkmarks clear at midnight so you can vote again tomorrow.</p></li>
     </ol>
-    <div class="tip">⭐ <strong>Short on time?</strong> Tap the star next to the places you love, then choose <strong>My picks</strong> to vote for just those each day.</div>
-    <button class="rules-toggle" id="rulesBtn" aria-expanded="false" aria-controls="rules">📋 Voting rules and tips</button>
-    <div class="rules" id="rules">
-      <ul>
-        <li>One vote per person, per category, per day, from October 1 through December 15.</li>
-        <li>Five categories have two Lynbrook nominees. You get one vote in a category each day, so choose one. Once you vote for one, the other locks until tomorrow. You can switch which one you support on a different day.</li>
-        <li>Use only your own FourLeaf account. FourLeaf checks for fraud and removes suspicious votes, so please don't make extra accounts.</li>
-        <li>If FourLeaf asks you to sign in again, you've probably opened it in a different browser or app. Switch back to Safari or Chrome.</li>
-        <li>Share this page with friends and family. Every person voting daily makes a difference.</li>
-      </ul>
-    </div>
+    <div class="tip"><strong>Only want to vote for a few?</strong> Tap <strong>+ MY LIST</strong> under each business you want. It turns green and is saved to your list. Then tap <strong>MY LIST</strong> above the search bar to show just those businesses. The page stays on your list until you tap <strong>All</strong>. Your list stays saved on this phone or computer.</div>
+        <h3 class="rules-h">Rules and tips</h3>
+        <div class="rules">
+          <ul>
+            <li>One vote per person, per category, per day, from October 1 through December 15.</li>
+            <li>One category, Financial Advisor, has two Lynbrook nominees. You get one vote there each day, so choose one. If you tap the second one on FourLeaf, it moves your vote instead of adding one. Once you vote for one here, the other locks until tomorrow.</li>
+            <li>If FourLeaf shows <strong>CHANGE VOTE</strong> instead of VOTE, you've already voted in that category today. Don't tap it, or your vote moves to that business.</li>
+            <li>Use only your own FourLeaf account. FourLeaf checks for fraud and removes suspicious votes, so please don't make extra accounts.</li>
+            <li>If FourLeaf asks you to sign in again, you've probably opened it in a different browser or app. Switch back to Safari or Chrome.</li>
+            <li>Share this page with friends and family. Every person voting daily makes a difference.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -204,14 +217,13 @@ footer p{margin:0 0 6px;max-width:70ch}
       <div class="seg" role="group" aria-label="Show">
         <button data-view="all" aria-pressed="true">All</button>
         <button data-view="todo" aria-pressed="false">Still to vote</button>
-        <button data-view="picks" aria-pressed="false">⭐ My picks</button>
+        <button data-view="picks" aria-pressed="false" id="myListBtn">MY LIST</button>
       </div>
       <label class="search">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7.5"/><path d="m20.5 20.5-4-4"/></svg>
         <input id="q" type="search" placeholder="Search businesses" aria-label="Search businesses" autocomplete="off">
       </label>
     </div>
-    <div class="chips" id="chips" role="group" aria-label="Category"></div>
   </div>
 </div>
 
@@ -222,17 +234,21 @@ footer p{margin:0 0 6px;max-width:70ch}
 <footer>
   <div class="wrap">
     <p>Shared by the Lynbrook Chamber of Commerce to support our local businesses. Not affiliated with FourLeaf Federal Credit Union or the Best of Long Island contest. All voting happens on the official FourLeaf ballot at bestoflongisland.com.</p>
-    <p>Your stars and checkmarks are saved only on this device.</p>
+    <p>Your MY LIST and checkmarks are saved only on this device.</p>
   </div>
 </footer>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-const DATA = [{"g": "Arts & Entertainment", "c": "Movie Theater", "n": "Regal Cinemas", "m": "Regal Cinemas", "e": "560911955", "k": "6186883"}, {"g": "Arts & Entertainment", "c": "Podcast", "n": "Chasing Fabulous", "m": "Chasing Fabulous", "e": "560912037", "k": "6186889"}, {"g": "Automotive", "c": "Auto Broker", "n": "Auto Concierge NY", "m": "AutoConcierge NY", "e": "560912176", "k": "6186900"}, {"g": "Automotive", "c": "Auto Parts Store", "n": "Advance Auto Parts", "m": "Advance Auto Parts", "e": "560912236", "k": "6186904"}, {"g": "Bars & Nightlife", "c": "Cigar Shop", "n": "Timeless Cigar Lounge", "m": "Timeless Cigar Lounge", "e": "560912627", "k": "6186930"}, {"g": "Education", "c": "Cooking School", "n": "Polly Talbott's A la Carte", "m": "Polly Talbott's A la Carte", "e": "560913030", "k": "6186958"}, {"g": "Education", "c": "Learning Center", "n": "Huntington Learning Center - Lynbrook", "m": "Huntington Learning Center", "e": "560913120", "k": "6186965"}, {"g": "Education", "c": "Mommy and Me Classes", "n": "The Little Gym of Lynbrook", "m": "The Little Gym of Lynbrook", "e": "560913154", "k": "6186967"}, {"g": "Education", "c": "Music School", "n": "School of Rock", "m": "School of Rock Rockville Centre", "e": "560913174", "k": "6186968"}, {"g": "Fashion & Clothing", "c": "Men’s Suit Store", "n": "Mur-Lees Mens & Boys Wear", "m": "Mur-Lees Mens & Boys Wear", "e": "560913391", "k": "6186983"}, {"g": "Fashion & Clothing", "c": "Women’s Fashion Store", "n": "Haila Atelier & Collection", "m": "Zaraz Collection (Haila Atelier & Collection)", "e": "560913444", "k": "6186987"}, {"g": "Food", "c": "Appetizer", "n": "Elsie Lane", "m": "Elsie Lane", "e": "560913472", "k": "6186989"}, {"g": "Food", "c": "BBQ Sauce", "n": "Elsie Lane", "m": "Elsie Lane", "e": "560913596", "k": "6186995"}, {"g": "Food", "c": "BBQ Sauce", "n": "The Filthy Pig Barbecue", "m": "The Filthy Pig BBQ / Beckmann's Delicatessen", "e": "560913603", "k": "6186995"}, {"g": "Food", "c": "Branzino", "n": "Livorno", "m": "Livorno Ristorante", "e": "560913644", "k": "6186998"}, {"g": "Food", "c": "Burger", "n": "Elsie Lane", "m": "Elsie Lane", "e": "560913717", "k": "6187002"}, {"g": "Food", "c": "Chicken Pot Pie", "n": "Pearsall’s Station", "m": "Pearsall's Station", "e": "560913838", "k": "6187010"}, {"g": "Food", "c": "Healthy Eatery", "n": "Hummus Fit", "m": "Hummus Fit", "e": "560914324", "k": "6187041"}, {"g": "Food", "c": "Linguini and Clam Sauce", "n": "Livorno", "m": "Livorno Ristorante", "e": "560914436", "k": "6187048"}, {"g": "Food", "c": "Mac and Cheese", "n": "Elsie Lane", "m": "Elsie Lane", "e": "560914516", "k": "6187054"}, {"g": "Food", "c": "Mac and Cheese", "n": "Gourmology", "m": "Gourmology", "e": "560914518", "k": "6187054"}, {"g": "Food", "c": "Onion Rings", "n": "Elsie Lane", "m": "Elsie Lane", "e": "560914651", "k": "6187064"}, {"g": "Food", "c": "Ribs", "n": "Gourmology", "m": "Gourmology", "e": "560914803", "k": "6187077"}, {"g": "Food", "c": "Veggie Burger", "n": "Elsie Lane", "m": "Elsie Lane", "e": "560915057", "k": "6187094"}, {"g": "Food", "c": "Wings", "n": "Gourmology", "m": "Gourmology", "e": "560915088", "k": "6187096"}, {"g": "Health, Wellness & Beauty", "c": "Assisted Living", "n": "The Bristal Assisted Living", "m": "The Bristal Assisted Living at Lynbrook", "e": "560915212", "k": "6187104"}, {"g": "Health, Wellness & Beauty", "c": "Audiologist", "n": "Dr. Esther Fogel - Comprehensive Audiology", "m": "Comprehensive Audiology", "e": "560915227", "k": "6187106"}, {"g": "Health, Wellness & Beauty", "c": "Nursing Home", "n": "Lynbrook Restorative Therapy and Nursing", "m": "Lynbrook Restorative Therapy & Nursing", "e": "560916159", "k": "6187169"}, {"g": "Health, Wellness & Beauty", "c": "OB-GYN", "n": "The Woman's Health Pavilion", "m": "The Woman's Health Pavilion", "e": "560916195", "k": "6187171"}, {"g": "Health, Wellness & Beauty", "c": "Personal Trainer", "n": "Iron Monkey Strength", "m": "Iron Monkey Strength", "e": "560916407", "k": "6187185"}, {"g": "Home & Garden", "c": "Exterminator", "n": "Allways Exterminating Company", "m": "Allways Exterminating Company", "e": "560917284", "k": "6187243"}, {"g": "Home & Garden", "c": "Home Remodeling", "n": "Lanzello Remodeling", "m": "Lanzello Remodeling", "e": "560917477", "k": "6187256"}, {"g": "Home & Garden", "c": "Kitchen and Bath", "n": "C&L Plumbing Supply and Kitchen & Bath Showroom", "m": "C & L Plumbing Supply Inc.", "e": "560917576", "k": "6187264"}, {"g": "Home & Garden", "c": "Kitchen and Bath", "n": "ShowerCrafters", "m": "ShowerCrafters", "e": "560917591", "k": "6187264"}, {"g": "Home & Garden", "c": "Plumbing Supply", "n": "C&L Plumbing Supply and Kitchen & Bath Showroom", "m": "C & L Plumbing Supply Inc.", "e": "560917805", "k": "6187282"}, {"g": "Home & Garden", "c": "Real Estate Agent", "n": "Jennie Katz - Blue Island Homes", "m": "Blue Island Homes", "e": "560917889", "k": "6187288"}, {"g": "Home & Garden", "c": "Real Estate Boutique Agency (Under 50 Brokers)", "n": "Blue Island Homes", "m": "Blue Island Homes", "e": "560917915", "k": "6187290"}, {"g": "Pets", "c": "Dog Trainer", "n": "UpDog Pet Services", "m": "UpDog Pet Services", "e": "560918315", "k": "6187317"}, {"g": "Restaurants", "c": "Japanese Restaurant", "n": "Inatome's HibachiBachi Lynbrook", "m": "Inatome's HibachiBachi Lynbrook", "e": "560918795", "k": "6187352"}, {"g": "Restaurants", "c": "Restaurant", "n": "Gourmology", "m": "Gourmology", "e": "560918908", "k": "6187359"}, {"g": "Restaurants", "c": "Steakhouse", "n": "Prime39", "m": "Prime 39 Restaurant", "e": "560919005", "k": "6187364"}, {"g": "Services", "c": "Accountant/CPA", "n": "Ryan Hode", "m": "Ryan Hode (Accountant)", "e": "560919102", "k": "6187370"}, {"g": "Services", "c": "Boss", "n": "Barry Kornblum - C&L Plumbing Supply and Kitchen & Bath Showroom", "m": "C & L Plumbing Supply Inc.", "e": "560919143", "k": "6187374"}, {"g": "Services", "c": "Computer Services", "n": "Lloyd Chrein, Tech Consultant", "m": "Lloyd Chrein, Tech Consultant", "e": "560919249", "k": "6187381"}, {"g": "Services", "c": "Content Creator - Entertainment", "n": "Eric Donaldson", "m": "Eric Donaldson", "e": "560919289", "k": "6187385"}, {"g": "Services", "c": "Employment Attorney", "n": "Christopher Marlborough Esq.", "m": "Christopher Marlborough Esq. (Employment Attorney)", "e": "560919527", "k": "6187404"}, {"g": "Services", "c": "Employment Attorney", "n": "The Marlborough Law Firm", "m": "Christopher Marlborough Esq. (Employment Attorney)", "e": "560919535", "k": "6187404"}, {"g": "Services", "c": "Financial Advisor", "n": "Pradeep Menon - Edward Jones", "m": "Edward Jones", "e": "560919584", "k": "6187407"}, {"g": "Services", "c": "Financial Advisor", "n": "Westco Financial Group", "m": "Westco Financial Group", "e": "560919590", "k": "6187407"}, {"g": "Services", "c": "Law Firm", "n": "Stockman & Poropat, PLLC", "m": "Stockman & Poropat, PLLC (Law Firm)", "e": "560919797", "k": "6187420"}, {"g": "Services", "c": "Printing Services", "n": "LMN Printing of NY, Inc", "m": "LMN Printing Co", "e": "560920058", "k": "6187437"}, {"g": "Services", "c": "Public Relations Firm", "n": "Corbett PR", "m": "Corbett Public Relations", "e": "560920125", "k": "6187441"}, {"g": "Services", "c": "Retirement Community", "n": "The Bristal Assisted Living - Multiple Locations", "m": "The Bristal Assisted Living at Lynbrook", "e": "560920182", "k": "6187444"}, {"g": "Services", "c": "Seamstress", "n": "Zaraz Collection", "m": "Zaraz Collection (Haila Atelier & Collection)", "e": "560920195", "k": "6187445"}, {"g": "Services", "c": "Tailor", "n": "Haila Atelier & Collection", "m": "Zaraz Collection (Haila Atelier & Collection)", "e": "560920269", "k": "6187451"}, {"g": "Shopping", "c": "Chamber of Commerce", "n": "Lynbrook Chamber of Commerce", "m": "Lynbrook Chamber of Commerce", "e": "560920498", "k": "6187467"}, {"g": "Shopping", "c": "Collectible & Nostalgia Store", "n": "LI Comic Shop LLC", "m": "LI Comic Shop", "e": "560920518", "k": "6187468"}, {"g": "Shopping", "c": "Customer Service", "n": "C&L Plumbing Supply and Kitchen & Bath Showroom", "m": "C & L Plumbing Supply Inc.", "e": "560920528", "k": "6187469"}, {"g": "Shopping", "c": "Hobby Store", "n": "Trainland", "m": "Trainland", "e": "560920639", "k": "6187476"}, {"g": "Shopping", "c": "Jewelry Store", "n": "Unicorn Jewels", "m": "Unicorn Jewels", "e": "560920686", "k": "6187479"}, {"g": "Sports & Activities", "c": "Bicycle Shop", "n": "Bike East Rockaway Lynbrook", "m": "Bike East Rockaway Lynbrook", "e": "560920838", "k": "6187492"}, {"g": "Sports & Activities", "c": "Children’s Gym", "n": "The Little Gym of Lynbrook", "m": "The Little Gym of Lynbrook", "e": "560920964", "k": "6187501"}, {"g": "Sports & Activities", "c": "Children’s Gymnastics Gym", "n": "The Little Gym of Lynbrook", "m": "The Little Gym of Lynbrook", "e": "560920983", "k": "6187502"}, {"g": "Sports & Activities", "c": "Climbing Walls", "n": "Iron Monkey Strength", "m": "Iron Monkey Strength", "e": "560921005", "k": "6187504"}, {"g": "Sports & Activities", "c": "Soccer Club", "n": "Lynbrook East Rockaway Soccer Club", "m": "Lynbrook East Rockaway Soccer Club", "e": "560921375", "k": "6187534"}];
+const DATA = [{"g": "Arts & Entertainment", "c": "Movie Theater", "n": "Regal Cinemas", "m": "Regal Cinemas", "e": "560911955", "k": "6186883"}, {"g": "Arts & Entertainment", "c": "Podcast", "n": "Chasing Fabulous", "m": "Chasing Fabulous", "e": "560912037", "k": "6186889"}, {"g": "Automotive", "c": "Auto Broker", "n": "Auto Concierge NY", "m": "AutoConcierge NY", "e": "560912176", "k": "6186900"}, {"g": "Automotive", "c": "Auto Parts Store", "n": "Advance Auto Parts", "m": "Advance Auto Parts", "e": "560912236", "k": "6186904"}, {"g": "Bars & Nightlife", "c": "Cigar Shop", "n": "Timeless Cigar Lounge", "m": "Timeless Cigar Lounge", "e": "560912627", "k": "6186930"}, {"g": "Education", "c": "Cooking School", "n": "Polly Talbott's A la Carte", "m": "Polly Talbott's A la Carte", "e": "560913030", "k": "6186958"}, {"g": "Education", "c": "Learning Center", "n": "Huntington Learning Center - Lynbrook", "m": "Huntington Learning Center", "e": "560913120", "k": "6186965"}, {"g": "Education", "c": "Mommy and Me Classes", "n": "The Little Gym of Lynbrook", "m": "The Little Gym of Lynbrook", "e": "560913154", "k": "6186967"}, {"g": "Education", "c": "Music School", "n": "School of Rock", "m": "School of Rock Rockville Centre", "e": "560913174", "k": "6186968"}, {"g": "Fashion & Clothing", "c": "Men’s Suit Store", "n": "Mur-Lees Mens & Boys Wear", "m": "Mur-Lees Mens & Boys Wear", "e": "560913391", "k": "6186983"}, {"g": "Fashion & Clothing", "c": "Women’s Fashion Store", "n": "Haila Atelier & Collection", "m": "Zaraz Collection (Haila Atelier & Collection)", "e": "560913444", "k": "6186987"}, {"g": "Food", "c": "Appetizer", "n": "Elsie Lane", "m": "Elsie Lane", "e": "560913472", "k": "6186989"}, {"g": "Food", "c": "BBQ Sauce", "n": "The Filthy Pig Barbecue", "m": "The Filthy Pig BBQ / Beckmann's Delicatessen", "e": "560913603", "k": "6186995"}, {"g": "Food", "c": "Branzino", "n": "Livorno", "m": "Livorno Ristorante", "e": "560913644", "k": "6186998"}, {"g": "Food", "c": "Burger", "n": "Elsie Lane", "m": "Elsie Lane", "e": "560913717", "k": "6187002"}, {"g": "Food", "c": "Chicken Pot Pie", "n": "Pearsall’s Station", "m": "Pearsall's Station", "e": "560913838", "k": "6187010"}, {"g": "Food", "c": "Healthy Eatery", "n": "Hummus Fit", "m": "Hummus Fit", "e": "560914324", "k": "6187041"}, {"g": "Food", "c": "Linguini and Clam Sauce", "n": "Livorno", "m": "Livorno Ristorante", "e": "560914436", "k": "6187048"}, {"g": "Food", "c": "Mac and Cheese", "n": "Gourmology", "m": "Gourmology", "e": "560914518", "k": "6187054"}, {"g": "Food", "c": "Onion Rings", "n": "Elsie Lane", "m": "Elsie Lane", "e": "560914651", "k": "6187064"}, {"g": "Food", "c": "Ribs", "n": "Gourmology", "m": "Gourmology", "e": "560914803", "k": "6187077"}, {"g": "Food", "c": "Veggie Burger", "n": "Elsie Lane", "m": "Elsie Lane", "e": "560915057", "k": "6187094"}, {"g": "Food", "c": "Wings", "n": "Gourmology", "m": "Gourmology", "e": "560915088", "k": "6187096"}, {"g": "Health, Wellness & Beauty", "c": "Assisted Living", "n": "The Bristal Assisted Living", "m": "The Bristal Assisted Living at Lynbrook", "e": "560915212", "k": "6187104"}, {"g": "Health, Wellness & Beauty", "c": "Audiologist", "n": "Dr. Esther Fogel - Comprehensive Audiology", "m": "Comprehensive Audiology", "e": "560915227", "k": "6187106"}, {"g": "Health, Wellness & Beauty", "c": "Nursing Home", "n": "Lynbrook Restorative Therapy and Nursing", "m": "Lynbrook Restorative Therapy & Nursing", "e": "560916159", "k": "6187169"}, {"g": "Health, Wellness & Beauty", "c": "OB-GYN", "n": "The Woman's Health Pavilion", "m": "The Woman's Health Pavilion", "e": "560916195", "k": "6187171"}, {"g": "Health, Wellness & Beauty", "c": "Personal Trainer", "n": "Iron Monkey Strength", "m": "Iron Monkey Strength", "e": "560916407", "k": "6187185"}, {"g": "Home & Garden", "c": "Exterminator", "n": "Allways Exterminating Company", "m": "Allways Exterminating Company", "e": "560917284", "k": "6187243"}, {"g": "Home & Garden", "c": "Home Remodeling", "n": "Lanzello Remodeling", "m": "Lanzello Remodeling", "e": "560917477", "k": "6187256"}, {"g": "Home & Garden", "c": "Kitchen and Bath", "n": "ShowerCrafters", "m": "ShowerCrafters", "e": "560917591", "k": "6187264"}, {"g": "Home & Garden", "c": "Plumbing Supply", "n": "C&L Plumbing Supply and Kitchen & Bath Showroom", "m": "C & L Plumbing Supply Inc.", "e": "560917805", "k": "6187282"}, {"g": "Home & Garden", "c": "Real Estate Agent", "n": "Jennie Katz - Blue Island Homes", "m": "Blue Island Homes", "e": "560917889", "k": "6187288"}, {"g": "Home & Garden", "c": "Real Estate Boutique Agency (Under 50 Brokers)", "n": "Blue Island Homes", "m": "Blue Island Homes", "e": "560917915", "k": "6187290"}, {"g": "Pets", "c": "Dog Trainer", "n": "UpDog Pet Services", "m": "UpDog Pet Services", "e": "560918315", "k": "6187317"}, {"g": "Restaurants", "c": "Japanese Restaurant", "n": "Inatome's HibachiBachi Lynbrook", "m": "Inatome's HibachiBachi Lynbrook", "e": "560918795", "k": "6187352"}, {"g": "Restaurants", "c": "Restaurant", "n": "Gourmology", "m": "Gourmology", "e": "560918908", "k": "6187359"}, {"g": "Restaurants", "c": "Steakhouse", "n": "Prime39", "m": "Prime 39 Restaurant", "e": "560919005", "k": "6187364"}, {"g": "Services", "c": "Accountant/CPA", "n": "Ryan Hode", "m": "Ryan Hode (Accountant)", "e": "560919102", "k": "6187370"}, {"g": "Services", "c": "Boss", "n": "Barry Kornblum - C&L Plumbing Supply and Kitchen & Bath Showroom", "m": "C & L Plumbing Supply Inc.", "e": "560919143", "k": "6187374"}, {"g": "Services", "c": "Computer Services", "n": "Lloyd Chrein, Tech Consultant", "m": "Lloyd Chrein, Tech Consultant", "e": "560919249", "k": "6187381"}, {"g": "Services", "c": "Content Creator - Entertainment", "n": "Eric Donaldson", "m": "Eric Donaldson", "e": "560919289", "k": "6187385"}, {"g": "Services", "c": "Employment Attorney", "n": "Christopher Marlborough Esq.", "m": "Christopher Marlborough Esq. (Employment Attorney)", "e": "560919527", "k": "6187404"}, {"g": "Services", "c": "Financial Advisor", "n": "Pradeep Menon - Edward Jones", "m": "Edward Jones", "e": "560919584", "k": "6187407"}, {"g": "Services", "c": "Financial Advisor", "n": "Westco Financial Group", "m": "Westco Financial Group", "e": "560919590", "k": "6187407"}, {"g": "Services", "c": "Law Firm", "n": "Stockman & Poropat, PLLC", "m": "Stockman & Poropat, PLLC (Law Firm)", "e": "560919797", "k": "6187420"}, {"g": "Services", "c": "Printing Services", "n": "LMN Printing of NY, Inc", "m": "LMN Printing Co", "e": "560920058", "k": "6187437"}, {"g": "Services", "c": "Public Relations Firm", "n": "Corbett PR", "m": "Corbett Public Relations", "e": "560920125", "k": "6187441"}, {"g": "Services", "c": "Retirement Community", "n": "The Bristal Assisted Living - Multiple Locations", "m": "The Bristal Assisted Living at Lynbrook", "e": "560920182", "k": "6187444"}, {"g": "Services", "c": "Seamstress", "n": "Zaraz Collection", "m": "Zaraz Collection (Haila Atelier & Collection)", "e": "560920195", "k": "6187445"}, {"g": "Services", "c": "Tailor", "n": "Haila Atelier & Collection", "m": "Zaraz Collection (Haila Atelier & Collection)", "e": "560920269", "k": "6187451"}, {"g": "Shopping", "c": "Chamber of Commerce", "n": "Lynbrook Chamber of Commerce", "m": "Lynbrook Chamber of Commerce", "e": "560920498", "k": "6187467"}, {"g": "Shopping", "c": "Collectible & Nostalgia Store", "n": "LI Comic Shop LLC", "m": "LI Comic Shop", "e": "560920518", "k": "6187468"}, {"g": "Shopping", "c": "Customer Service", "n": "C&L Plumbing Supply and Kitchen & Bath Showroom", "m": "C & L Plumbing Supply Inc.", "e": "560920528", "k": "6187469"}, {"g": "Shopping", "c": "Hobby Store", "n": "Trainland", "m": "Trainland", "e": "560920639", "k": "6187476"}, {"g": "Shopping", "c": "Jewelry Store", "n": "Unicorn Jewels", "m": "Unicorn Jewels", "e": "560920686", "k": "6187479"}, {"g": "Sports & Activities", "c": "Bicycle Shop", "n": "Bike East Rockaway Lynbrook", "m": "Bike East Rockaway Lynbrook", "e": "560920838", "k": "6187492"}, {"g": "Sports & Activities", "c": "Children’s Gym", "n": "The Little Gym of Lynbrook", "m": "The Little Gym of Lynbrook", "e": "560920964", "k": "6187501"}, {"g": "Sports & Activities", "c": "Children’s Gymnastics Gym", "n": "The Little Gym of Lynbrook", "m": "The Little Gym of Lynbrook", "e": "560920983", "k": "6187502"}, {"g": "Sports & Activities", "c": "Climbing Walls", "n": "Iron Monkey Strength", "m": "Iron Monkey Strength", "e": "560921005", "k": "6187504"}, {"g": "Sports & Activities", "c": "Soccer Club", "n": "Lynbrook East Rockaway Soccer Club", "m": "Lynbrook East Rockaway Soccer Club", "e": "560921375", "k": "6187534"}];
 const VOTE_URL = id => "https://www.bestoflongisland.com/voting/#/gallery/" + id;
 const START = "2026-10-01", END = "2026-12-15";
-const ORDER = ["Arts & Entertainment","Automotive","Bars & Nightlife","Education","Fashion & Clothing","Food","Health, Wellness & Beauty","Home & Garden","Pets","Restaurants","Services","Shopping","Sports & Activities","Weddings"];
+const ORDER = ["Services","Arts & Entertainment","Automotive","Bars & Nightlife","Education","Fashion & Clothing","Food","Health, Wellness & Beauty","Home & Garden","Pets","Restaurants","Shopping","Sports & Activities","Weddings"];
+// Services leads with accountants, then attorneys (Employment Attorney first), then the rest
+const ATTY = ["Accountant/CPA","Accounting Firm","Employment Attorney","Law Firm","Lawyer","Divorce Lawyer","Elder Law Attorney","Personal Injury Lawyer"];
+const DOUBLE = "Choose one per day";
+const attyRank = d => { const i = ATTY.indexOf(d.c); return i < 0 ? (/attorney|lawyer|law firm/i.test(d.c) ? ATTY.length : 99) : i; };
 
 // ---------- storage (safe if blocked) ----------
 const store = {
@@ -250,11 +266,14 @@ const TOTAL_DAYS = dayIndex(END) + 1;
 
 // ---------- state ----------
 let today = nyDate();
-let picks = store.get("vl_picks", {});
+// MY LIST is kept per ballot spot (business + category), keyed by FourLeaf entry ID
+let picks = store.get("vl_list", {});
+Object.keys(picks).forEach(k => { if (!DATA.some(d=>d.e===k)) delete picks[k]; });
 let votedDay = store.get("vl_voted", {date: today, ids: {}});
 let history = store.get("vl_history", {});
 if (votedDay.date !== today) votedDay = {date: today, ids: {}};
-let view = "all", cat = "All", query = "";
+let view = store.get("vl_view","all"), cat = "All", query = "";
+if (!["all","todo","picks"].includes(view)) view = "all";
 
 // competing Lynbrook nominees in the same FourLeaf category
 const byCat = {};
@@ -276,7 +295,7 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 let toastT;
 function toast(msg){ const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(()=>t.classList.remove("show"), 2600); }
-function save(){ store.set("vl_picks", picks); store.set("vl_voted", votedDay); store.set("vl_history", history); }
+function save(){ store.set("vl_list", picks); store.set("vl_voted", votedDay); store.set("vl_history", history); }
 function rollover(){
   const now = nyDate();
   if (now !== today){ today = now; votedDay = {date: today, ids: {}}; save(); renderAll(); }
@@ -284,33 +303,29 @@ function rollover(){
 
 // ---------- header ----------
 function renderHeader(){
-  $("#spotCount").textContent = new Set(DATA.map(d=>d.k)).size;
   $("#bizCount").textContent = new Set(DATA.map(d=>d.m)).size;
   const ti = dayIndex(today);
-  const left = TOTAL_DAYS - ti;
-  $("#daysLeft").textContent = ti < 0 ? "Voting opens October 1" : left <= 0 ? "Voting has closed" : left === 1 ? "Last day to vote" : left + " days left";
-  const cells = $("#cells"); cells.innerHTML = "";
+  const left = Math.max(0, TOTAL_DAYS - ti);
+  $("#daysLeft").textContent = ti < 0 ? TOTAL_DAYS : left;
+  $("#daysLeftLbl").textContent = ti < 0 ? "voting days" : left === 1 ? "day left" : "days left";
   let count = 0;
   for (let i = 0; i < TOTAL_DAYS; i++){
     const d = new Date(Date.parse(START+"T12:00:00Z") + i*86400000).toISOString().slice(0,10);
-    const c = document.createElement("div");
-    c.className = "cell" + (history[d] ? " voted" : "") + (i === ti ? " today" : "") + (i < ti ? " past" : "");
-    c.title = new Date(d+"T12:00:00Z").toLocaleDateString("en-US",{month:"short",day:"numeric",timeZone:"UTC"}) + (history[d] ? ": voted" : "");
-    cells.appendChild(c);
     if (history[d]) count++;
   }
-  $("#punchText").textContent = count === 0 ? "Your voting days start today" : `You've voted on ${count} of ${TOTAL_DAYS} days`;
-  // streak
+  $("#daysVoted").textContent = count;
+  $("#daysVotedLbl").textContent = count === 1 ? "day voted" : "days voted";
   let s = 0;
   for (let i = ti; i >= 0; i--){
     const d = new Date(Date.parse(START+"T12:00:00Z") + i*86400000).toISOString().slice(0,10);
     if (history[d]) s++; else if (i === ti) continue; else break;
   }
-  $("#streakText").textContent = s >= 2 ? `🔥 ${s}-day streak` : "";
+  $("#streak").textContent = s;
 }
 
 // ---------- chips ----------
 function renderChips(){
+  if (!$("#chips")) return;
   const cats = ["All", ...ORDER.filter(g => DATA.some(d=>d.g===g))];
   $("#chips").innerHTML = cats.map(c => `<button class="chip" data-cat="${esc(c)}" aria-pressed="${c===cat}">${esc(c)}</button>`).join("");
 }
@@ -322,11 +337,37 @@ function visible(){
     if (q) return (d.n+" "+d.m+" "+d.c+" "+d.g).toLowerCase().includes(q);
     if (cat !== "All" && d.g !== cat) return false;
     if (view === "todo" && votedIn(d.k)) return false;
-    if (view === "picks" && !picks[d.m]) return false;
+    if (view === "picks" && !picks[d.e]) return false;
     return true;
   });
 }
-const STAR = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.1l-5.7 3.2 1.2-6.4-4.7-4.4 6.4-.8z"/></svg>';
+
+function rowHTML(d){
+        const isDone = !!votedDay.ids[d.e];
+        const winner = votedIn(d.k);
+        const locked = !!winner && winner !== d.e;
+        const others = byCat[d.k].filter(o => o.e !== d.e);
+        let clash = "";
+        if (others.length){
+          if (locked) clash = `<div class="clash">You picked ${esc(byCat[d.k].find(o=>o.e===winner).n)} here today. Voting for this one would move that vote, so it opens again tomorrow.</div>`;
+          else if (isDone) clash = `<div class="clash">Your pick in this category today. Don't vote for ${esc(others.map(o=>o.n).join(", "))} today, or FourLeaf moves your vote.</div>`;
+          else clash = `<div class="clash">Or vote for ${esc(others.map(o=>o.n).join(", "))}, not both.</div>`;
+        }
+        const showMember = d.m.toLowerCase().replace(/[^a-z0-9]/g,"") !== d.n.toLowerCase().replace(/[^a-z0-9]/g,"") && !d.n.toLowerCase().includes(d.m.toLowerCase().split(" (")[0]);
+        return `<div class="row${isDone?" done":""}${locked?" locked":""}">
+          <div class="info">
+            <div class="name">${esc(d.n)}</div>
+            <div class="cat">${esc(d.c)}</div>
+            ${showMember ? `<div class="member">Chamber member: ${esc(d.m)}</div>` : ""}
+            ${clash}
+            <button class="star" data-star="${d.e}" aria-pressed="${!!picks[d.e]}" aria-label="${picks[d.e]?"Remove":"Add"} ${esc(d.n)}, ${esc(d.c)}, ${picks[d.e]?"from":"to"} MY LIST">${picks[d.e]?"✓ On MY LIST":"+ MY LIST"}</button>
+          </div>
+          <div class="act">
+            ${locked ? `<span class="used" aria-label="Category already voted today">Opens tomorrow</span>` : `<a class="vote" href="${VOTE_URL(d.e)}" target="_blank" rel="noopener" data-vote="${d.e}">${isDone ? "✓ Voted" : "Vote"}</a>`}
+            <button class="undo" data-undo="${d.e}">Not voted yet</button>
+          </div>
+        </div>`;
+      }
 
 function renderList(){
   const items = visible();
@@ -335,58 +376,46 @@ function renderList(){
     let msg = "No businesses match that search.";
     let btn = "";
     if (!query){
-      if (view === "picks") { msg = "You haven't starred any businesses yet. Tap the star next to a business to add it to My picks."; btn = `<button class="btn2" data-go="all">Show all businesses</button>`; }
-      else if (view === "todo") { msg = "🎉 You've voted in every category on this list today. Come back tomorrow to vote again."; btn = `<button class="btn2" data-go="all">Show all businesses</button>`; }
+      if (view === "picks") { msg = "Your MY LIST is empty. Tap All, then tap + MY LIST under each business you want to vote for."; btn = `<button class="btn2" data-go="all">Show all businesses</button>`; }
+      else if (view === "todo") { msg = "You've voted in every category on this list today. Come back tomorrow to vote again."; btn = `<button class="btn2" data-go="all">Show all businesses</button>`; }
     }
     host.innerHTML = `<div class="empty"><p>${msg}</p>${btn}</div>`;
     return;
   }
   const groups = {};
-  items.forEach(d => (groups[d.g] = groups[d.g] || []).push(d));
-  host.innerHTML = ORDER.filter(g => groups[g]).map(g => {
-    const rows = groups[g].sort((a,b)=> a.n.localeCompare(b.n) || a.c.localeCompare(b.c));
+  // categories with two Lynbrook nominees go in their own section at the end
+  items.forEach(d => { const key = byCat[d.k].length > 1 ? DOUBLE : d.g; (groups[key] = groups[key] || []).push(d); });
+  host.innerHTML = [...ORDER, DOUBLE].filter(g => groups[g]).map(g => {
+    const rows = g === DOUBLE
+      ? groups[g].sort((a,b)=> attyRank(a) - attyRank(b) || a.c.localeCompare(b.c) || a.n.localeCompare(b.n))
+      : groups[g].sort((a,b)=> attyRank(a) - attyRank(b) || a.n.localeCompare(b.n) || a.c.localeCompare(b.c));
     const ks = [...new Set(rows.map(d=>d.k))];
     const done = ks.filter(k=>votedIn(k)).length;
-    return `<section class="group"><h3>${esc(g)} <small>${done} of ${ks.length} ${ks.length===1?"category":"categories"} voted today</small></h3><div class="list">` +
-      rows.map(d => {
-        const isDone = !!votedDay.ids[d.e];
-        const winner = votedIn(d.k);
-        const locked = !!winner && winner !== d.e;
-        const others = byCat[d.k].filter(o => o.e !== d.e);
-        let clash = "";
-        if (others.length){
-          if (locked) clash = `<div class="clash">You picked ${esc(byCat[d.k].find(o=>o.e===winner).n)} here today. Opens again tomorrow.</div>`;
-          else if (isDone) clash = `<div class="clash">Your pick in this category today. ${esc(others.map(o=>o.n).join(", "))} is locked until tomorrow.</div>`;
-          else clash = `<div class="clash">Choose one per day: ${esc(others.map(o=>o.n).join(", "))} is also in this category.</div>`;
-        }
-        const showMember = d.m.toLowerCase().replace(/[^a-z0-9]/g,"") !== d.n.toLowerCase().replace(/[^a-z0-9]/g,"") && !d.n.toLowerCase().includes(d.m.toLowerCase().split(" (")[0]);
-        return `<div class="row${isDone?" done":""}${locked?" locked":""}">
-          <button class="star" data-star="${esc(d.m)}" aria-pressed="${!!picks[d.m]}" aria-label="${picks[d.m]?"Remove":"Add"} ${esc(d.m)} ${picks[d.m]?"from":"to"} My picks">${STAR}</button>
-          <div class="info">
-            <div class="name">${esc(d.n)}</div>
-            <div class="cat">${esc(d.c)}</div>
-            ${showMember ? `<div class="member">Chamber member: ${esc(d.m)}</div>` : ""}
-            ${clash}
-          </div>
-          <div class="act">
-            ${locked ? `<span class="used" aria-label="Category already voted today">Opens tomorrow</span>` : `<a class="vote" href="${VOTE_URL(d.e)}" target="_blank" rel="noopener" data-vote="${d.e}">${isDone ? "✓ Voted" : "Vote"}</a>`}
-            <button class="undo" data-undo="${d.e}">Not voted yet</button>
-          </div>
-        </div>`;
-      }).join("") + `</div></section>`;
+    const intro = g === DOUBLE ? `<p class="dintro">Each of these categories has two Lynbrook businesses. You get one vote per category each day, so pick one. Voting for the second one on FourLeaf moves your vote.</p>` : "";
+    return `<section class="group${g===DOUBLE?" double":""}"><h3>${esc(g)} <small>${done} of ${ks.length} ${ks.length===1?"category":"categories"} voted today</small></h3>${intro}<div class="list">` +
+      rows.map(rowHTML).join("") + `</div></section>`;
   }).join("");
 }
 
 function renderProgress(){
-  const pool = view === "picks" ? DATA.filter(d=>picks[d.m]) : DATA;
+  const pool = view === "picks" ? DATA.filter(d=>picks[d.e]) : DATA;
   const ks = [...new Set(pool.map(d=>d.k))];
   const done = ks.filter(k=>votedIn(k)).length;
   const total = ks.length;
-  $("#ptext").innerHTML = total ? `<b>${done}</b> of ${total} categories voted today` : "Star a business to build My picks";
+  $("#ptext").innerHTML = total ? `<b>${done}</b> of ${total} ${view==="picks"?"MY LIST ":""}categories voted today` : "Tap + MY LIST under a business to build your list";
   $("#fill").style.width = total ? (done/total*100)+"%" : "0";
 }
 
-function renderAll(){ renderHeader(); renderChips(); renderList(); renderProgress(); }
+function setView(v){
+  view = v; store.set("vl_view", v);
+  document.querySelectorAll("[data-view]").forEach(b => b.setAttribute("aria-pressed", b.dataset.view === v));
+}
+function renderListCount(){
+  const n = Object.keys(picks).length;
+  const b = $("#myListBtn");
+  b.textContent = n ? `MY LIST (${n})` : "MY LIST";
+}
+function renderAll(){ renderHeader(); renderChips(); renderList(); renderProgress(); renderListCount(); }
 
 // ---------- events ----------
 document.addEventListener("click", e => {
@@ -395,7 +424,7 @@ document.addEventListener("click", e => {
     const id = v.dataset.vote;
     const d = DATA.find(x=>x.e===id);
     const w = votedIn(d.k);
-    if (w && w !== id){ e.preventDefault(); toast("You already voted in this category today"); return; }
+    if (w && w !== id){ e.preventDefault(); toast("You already voted in this category today. A second vote would move it."); return; }
     if (!votedDay.ids[id]){
       votedDay.ids[id] = 1;
       history[today] = 1;
@@ -416,15 +445,15 @@ document.addEventListener("click", e => {
   const s = e.target.closest("[data-star]");
   if (s){
     const m = s.dataset.star;
-    if (picks[m]) { delete picks[m]; toast("Removed from My picks"); }
-    else { picks[m] = 1; toast("Added to My picks"); }
-    save(); renderList(); renderProgress();
+    if (picks[m]) { delete picks[m]; toast("Removed from MY LIST"); }
+    else { picks[m] = 1; toast("Added to MY LIST"); }
+    save(); renderList(); renderProgress(); renderListCount();
     return;
   }
   const vb = e.target.closest("[data-view]");
   if (vb){
-    view = vb.dataset.view;
-    document.querySelectorAll("[data-view]").forEach(b => b.setAttribute("aria-pressed", b === vb));
+    setView(vb.dataset.view);
+    if (view === "picks" && !Object.keys(picks).length) toast("Tap + MY LIST under a business to add it");
     renderList(); renderProgress();
     return;
   }
@@ -434,14 +463,13 @@ document.addEventListener("click", e => {
   if (c){ cat = c.dataset.cat; renderChips(); renderList(); return; }
 });
 $("#q").addEventListener("input", e => { query = e.target.value; renderList(); });
-$("#rulesBtn").addEventListener("click", () => {
-  const r = $("#rules"); const open = r.classList.toggle("open");
-  $("#rulesBtn").setAttribute("aria-expanded", open);
-});
 document.addEventListener("visibilitychange", () => { if (!document.hidden) rollover(); });
 window.addEventListener("focus", rollover);
 setInterval(rollover, 60000);
 
+setView(view);
+// show the instructions open on someone's first visit only
+if (!store.get("vl_seen", false)) { $("#howFold").open = true; store.set("vl_seen", true); }
 renderAll();
 </script>
 </body>
