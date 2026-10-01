@@ -112,8 +112,8 @@ main .wrap{padding-top:8px;padding-bottom:40px}
 .row.done .undo{display:inline}
 .dintro{margin:-2px 0 10px;font-size:13.5px;color:var(--ink-2);max-width:62ch}
 .group.double h3{color:var(--warn)}
-.pc{display:none}
-.desktop .pc{display:inline}
+.d-ios,.d-android,.d-pc,.d-other,.d-phone{display:none}
+.dev-ios .d-ios,.dev-android .d-android,.dev-pc .d-pc,.dev-other .d-other,.dev-ios .d-phone,.dev-android .d-phone,.dev-other .d-phone{display:inline}
 .empty{text-align:center;padding:40px 16px;color:var(--ink-2)}
 .empty button{margin-top:10px}
 .btn2{border:1px solid var(--green-2);background:#fff;color:var(--green);border-radius:99px;padding:7px 14px;font-weight:600;font-size:13.5px;cursor:pointer}
@@ -186,11 +186,25 @@ footer p{margin:0 0 6px;max-width:70ch}
       <summary><span>How to vote and rules</span><span class="chev" aria-hidden="true"></span></summary>
       <div class="foldbody">
     <ol class="steps">
-      <li><span class="n">A</span><p>Open this page in <strong>Safari or Chrome</strong>, not inside Facebook, Instagram or a text message. Tip: save it to your home screen so it's one tap away tomorrow.</p></li>
-      <li><span class="n">B</span><p>Tap <strong>Vote</strong> next to a business. The FourLeaf ballot opens, already on that business. <span class="pc">On a computer it opens in a second tab, and every vote reuses that same tab.</span></p></li>
-      <li><span class="n">C</span><p>On the FourLeaf page, scroll down past the orange <span class="fl">2027 Voting Is Now Open!</span> banner to the business's name and tap <strong>VOTE</strong>. The button changes to <span class="flv">✓ VOTED</span>. If you see <strong>CHANGE VOTE</strong> instead, you already voted in that category today, so leave it alone.</p></li>
+      <li><span class="n">A</span><p>
+        <span class="d-ios">Open this page in <strong>Safari</strong>, not inside Facebook, Instagram or a text message. Tip: tap the Share button, then <strong>Add to Home Screen</strong>, so it's one tap away tomorrow.</span>
+        <span class="d-android">Open this page in <strong>Chrome</strong>, not inside Facebook, Instagram or a text message. Tip: tap the ⋮ menu, then <strong>Add to Home screen</strong>, so it's one tap away tomorrow.</span>
+        <span class="d-pc">Bookmark this page so it's one click away tomorrow.</span>
+        <span class="d-other">Open this page in <strong>Safari or Chrome</strong>, not inside Facebook, Instagram or a text message.</span>
+      </p></li>
+      <li><span class="n">B</span><p>
+        <span class="d-phone">Tap <strong>Vote</strong> next to a business. The FourLeaf ballot opens, already on that business.</span>
+        <span class="d-pc">Click <strong>Vote</strong> next to a business. The FourLeaf ballot opens in a new tab, already on that business.</span>
+      </p></li>
+      <li><span class="n">C</span><p>On the FourLeaf page, scroll down past the orange <span class="fl">2027 Voting Is Now Open!</span> banner to the business's name and <span class="d-phone">tap</span><span class="d-pc">click</span> <strong>VOTE</strong>. The button changes to <span class="flv">✓ VOTED</span>. If you see <strong>CHANGE VOTE</strong> instead, you already voted in that category today, so leave it alone.</p></li>
       <li><span class="n">D</span><p><strong>First time only:</strong> FourLeaf asks you to sign in or create a free account. After that it remembers you, as long as you keep using the same browser.</p></li>
-      <li><span class="n">E</span><p><strong>Come back here.</strong> On a phone, use Back: swipe in from the left edge on an iPhone, or tap Back on Android. On a computer, click this page's tab. Then tap the next one. We check off each business as you go, and the checkmarks clear at midnight so you can vote again tomorrow.</p></li>
+      <li><span class="n">E</span><p>
+        <span class="d-ios"><strong>Swipe in from the left edge</strong> of the screen to come back here, then tap the next one.</span>
+        <span class="d-android"><strong>Tap Back</strong> to come back here, then tap the next one.</span>
+        <span class="d-pc"><strong>Click this page's tab</strong> to come back here. The FourLeaf tab closes on its own. Then click the next one.</span>
+        <span class="d-other"><strong>Go back</strong> to this page, then tap the next one.</span>
+        We check off each business as you go, and the checkmarks clear at midnight so you can vote again tomorrow.
+      </p></li>
     </ol>
     <div class="tip"><strong>Only want to vote for a few?</strong> Tap <strong>+ MY LIST</strong> under each business you want. It turns green and is saved to your list. Then tap <strong>MY LIST</strong> above the search bar to show just those businesses. The page stays on your list until you tap <strong>All</strong>. Your list stays saved on this phone or computer.</div>
         <h3 class="rules-h">Rules and tips</h3>
@@ -430,6 +444,13 @@ document.addEventListener("click", e => {
     const d = DATA.find(x=>x.e===id);
     const w = votedIn(d.k);
     if (w && w !== id){ e.preventDefault(); toast("You already voted in this category today. A second vote would move it."); return; }
+    if (DESKTOP){
+      // open FourLeaf ourselves so we keep a handle and can close it when the voter comes back
+      e.preventDefault();
+      ballotWin = window.open(v.href, "fourleaf_ballot");
+      ballotOpenedAt = Date.now();
+      if (!ballotWin) location.href = v.href; // pop-up blocked: fall back to this tab
+    }
     if (!votedDay.ids[id]){
       votedDay.ids[id] = 1;
       voteDays[today] = 1;
@@ -467,7 +488,8 @@ document.addEventListener("click", e => {
   if (c){ cat = c.dataset.cat; renderChips(); renderList(); return; }
 });
 $("#q").addEventListener("input", e => { query = e.target.value; renderList(); });
-document.addEventListener("visibilitychange", () => { if (!document.hidden) rollover(); });
+document.addEventListener("visibilitychange", () => { if (!document.hidden) { rollover(); closeBallot(); } });
+window.addEventListener("focus", closeBallot);
 // coming back from FourLeaf with Back: reload saved state and redraw
 window.addEventListener("pageshow", e => {
   if (e.persisted){
@@ -478,9 +500,23 @@ window.addEventListener("pageshow", e => {
   }
 });
 window.addEventListener("focus", rollover);
+// computers: when the voter clicks back to this tab, close the FourLeaf tab we opened
+let ballotWin = null, ballotOpenedAt = 0;
+function closeBallot(){
+  if (!DESKTOP || !ballotWin) return;
+  if (Date.now() - ballotOpenedAt < 2000) return; // ignore the focus flicker right after opening
+  try { if (!ballotWin.closed) ballotWin.close(); } catch (err) {}
+  ballotWin = null;
+}
 setInterval(rollover, 60000);
 
-if (DESKTOP) document.documentElement.classList.add("desktop");
+(function(){
+  const ua = navigator.userAgent || "";
+  const ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  const android = /Android/i.test(ua);
+  const dev = DESKTOP ? "pc" : ios ? "ios" : android ? "android" : "other";
+  document.documentElement.classList.add("dev-" + dev);
+})();
 setView(view);
 // show the instructions open on someone's first visit only
 if (!store.get("vl_seen", false)) { $("#howFold").open = true; store.set("vl_seen", true); }
