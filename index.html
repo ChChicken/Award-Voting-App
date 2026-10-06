@@ -510,7 +510,7 @@ window.addEventListener("pageshow", e => {
 window.addEventListener("focus", rollover);
 // computers: when the voter clicks back to this tab, close the FourLeaf tab we opened
 let ballotWin = null, ballotOpenedAt = 0, closeTimer = null;
-const CLOSE_DELAY = 2000; // give FourLeaf a couple of seconds to register the vote before closing its tab
+const CLOSE_DELAY = 4000; // give FourLeaf a few seconds to register the vote before closing its tab
 function closeBallot(){
   if (!DESKTOP || !ballotWin || closeTimer) return;
   if (Date.now() - ballotOpenedAt < 2000) return; // ignore the focus flicker right after opening
