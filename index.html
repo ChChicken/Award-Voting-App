@@ -45,6 +45,10 @@ h1{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(30px,6vw,44px);l
 .share:hover{background:rgba(231,217,179,.12)}
 .closed{display:none;background:var(--gold);color:#fff;text-align:center;padding:12px 16px;font-weight:700;font-size:15px}
 .closed.show{display:block}
+.wifi{background:var(--warn-bg);border-bottom:3px solid var(--warn);color:var(--ink);font-size:14.5px;line-height:1.45}
+.wifi .wrap{padding-top:11px;padding-bottom:11px;display:flex;gap:10px;align-items:flex-start}
+.wifi .ic{font-size:20px;line-height:1}
+.wifi strong{color:var(--warn)}
 .is-closed .star,.is-closed .group h3 small,.is-closed .share,.is-closed .vote,.is-closed .used,.is-closed .undo,.is-closed .clash,.is-closed .howto,.is-closed .bar{display:none}
 
 /* How to */
@@ -186,6 +190,15 @@ footer p{margin:0 0 6px;max-width:70ch}
   </div>
 </header>
 <div class="closed" id="closedBanner" role="status"></div>
+<div class="wifi" role="note">
+  <div class="wrap">
+    <span class="ic" aria-hidden="true">📶</span>
+    <p style="margin:0">
+      <span class="d-phone"><strong>Turn Wi-Fi off before you vote.</strong> FourLeaf only counts a limited number of votes from any one internet connection, so votes from home, office or store Wi-Fi can be thrown out. Vote using your phone's cell data so your votes count.</span>
+      <span class="d-pc"><strong>Best on your phone, with Wi-Fi off.</strong> FourLeaf only counts a limited number of votes from any one internet connection, so votes from a home, office or store network can be thrown out. If you can, vote on your phone using cell data instead.</span>
+    </p>
+  </div>
+</div>
 
 <section class="howto">
   <div class="wrap">
@@ -220,6 +233,7 @@ footer p{margin:0 0 6px;max-width:70ch}
             <li>One vote per person, per category, per day, from October 1 through December 15.</li>
             <li>One category, Financial Advisor, has two Lynbrook nominees. You get one vote there each day, so choose one. If you tap the second one on FourLeaf, it moves your vote instead of adding one. Once you vote for one here, the other locks until tomorrow.</li>
             <li>If FourLeaf shows <strong>CHANGE VOTE</strong> instead of VOTE, you've already voted in that category today. Don't tap it, or your vote moves to that business.</li>
+            <li>Vote on your phone with <strong>Wi-Fi turned off</strong>. FourLeaf only counts up to 10% of a category's votes from any one internet connection, so votes from shared home, office or store Wi-Fi can be discarded.</li>
             <li>Use only your own FourLeaf account. FourLeaf checks for fraud and removes suspicious votes, so please don't make extra accounts.</li>
             <li>If FourLeaf asks you to sign in again, you've probably opened it in a different browser or app. Switch back to Safari or Chrome.</li>
             <li>Share this page with friends and family. Every person voting daily makes a difference.</li>
